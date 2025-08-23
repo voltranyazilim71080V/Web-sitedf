@@ -55,11 +55,11 @@ const GLB_FILES = [
 ];
 
 const TEXTURE_FILES = [
-    "/texture/texture1.jpg",
-    "/texture/texture2.jpg",
-    "/texture/texture3.jpg",
-    "/texture/texture4.jpg",
-    "/texture/texture5.jpg",
+    "/texture2/texture1.jpg",
+    "/texture2/texture2.jpg",
+    "/texture2/texture3.jpg",
+    "/texture2/texture4.jpg",
+    "/texture2/texture5.jpg",
 ];
 
 const ALL_FILES = [...GLB_FILES, ...TEXTURE_FILES];
