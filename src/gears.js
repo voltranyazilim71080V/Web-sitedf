@@ -49,11 +49,11 @@ scene.add(ambientLight);
 
 loader.setMeshoptDecoder(MeshoptDecoder);
 
-const colorMap = textureloader.load("texture/texture1.jpg");
-const roughnessMap = textureloader.load("texture/texture2.jpg");
-const metalnessMap = textureloader.load("texture/texture3.jpg");
-const normalMap = textureloader.load("texture/texture4.jpg");
-const displacementMap = textureloader.load("texture/texture5.jpg");
+const colorMap = textureloader.load("texture2/texture1.jpg");
+const roughnessMap = textureloader.load("texture2/texture2.jpg");
+const metalnessMap = textureloader.load("texture2/texture3.jpg");
+const normalMap = textureloader.load("texture2/texture4.jpg");
+const displacementMap = textureloader.load("texture2/texture5.jpg");
 
 let direction = 1;
 
