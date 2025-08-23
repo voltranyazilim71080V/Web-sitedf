@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/meshopt_decoder.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bezier-easing@2.1.0/dist/bezier-easing.min.js"></script>
+    <title>Voltran Robotics</title>
+  </head>
+  <body>
+    <div class="stars-container"></div>
+    <div class="meteor-container">
+      <div class="meteor-1"></div>
+      <div class="meteor-2"></div>
+      <div class="meteor-3"></div>
+      <div class="meteor-4"></div>
+      <div class="meteor-5"></div>
+      <div class="meteor-6"></div>
+      <div class="meteor-7"></div>
+      <div class="meteor-8"></div>
+      <div class="meteor-9"></div>
+      <div class="meteor-10"></div>
+      <div class="meteor-11"></div>
+      <div class="meteor-12"></div>
+      <div class="meteor-13"></div>
+      <div class="meteor-14"></div>
+      <div class="meteor-15"></div>
+    </div>
+
+    <!-- HEADER / NAV -->
+    <header class="navbar nav-wrap">
+      <div class="logo-div">
+        <img
+          class="logo"
+          src="/SVG/voltranLogo.svg"
+          alt="Voltran Robotics Logo"
+        />
+        <h1 class="logo-title">VOLTRAN ROBOTICS</h1>
+      </div>
+      <nav class="titles">
+        <ul class="menu">
+          <li><a class="title" href="#">Achievements</a></li>
+          <li><a class="title" href="#">Competition</a></li>
+          <li><a class="title" href="#">Sponsorship</a></li>
+          <li><button class="contact-button">Contact us</button></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="screen">
+      <!-- HERO SECTION -->
+      <section class="first-row">
+        <div class="main-titles">
+          <h1 class="large-title">PERTEVNIYAL<br />ROBOTICS</h1>
+          <h2 class="small-title">
+            We are competing in the high school category <br />of the Vex
+            competition.
+          </h2>
+        </div>
+        <figure class="gear-canvas-wrapper" id="gear-wrapper"></figure>
+      </section>
+
+      <!-- ABOUT US -->
+      <section class="row about">
+        <aside>
+          <a
+            href="https://www.instagram.com/voltranrobotics/"
+            target="_blank"
+            draggable="false"
+          >
+            <img
+              class="instagram"
+              id="photo1"
+              src="/SVG/insta.svg"
+              alt="Instagram Icon"
+              draggable="false"
+          /></a>
+        </aside>
+        <article class="text-div">
+          <h1 class="large-title">WHO WE ARE?</h1>
+          <p class="text" id="text1">
+            <span class="satir" id="satir1_text1"
+              >VolTRan Robotics is the official high school robotics team
+              of</span
+            >
+            <span class="satir" id="satir2_text1"
+              >Pertevniyal High School, based in Istanbul, Turkey. We were</span
+            >
+            <span class="satir" id="satir3_text1"
+              >established in 2017 as part of the globally renowned FRC
+              (FIRST</span
+            >
+            <span class="satir" id="satir4_text1"
+              >Robotics Competition), and have been continuing our journey
+              since</span
+            >
+            <span class="satir" id="satir5_text1"
+              >2021 in the VEX Robotics Competition. Our team consists of
+              highly</span
+            >
+            <span class="satir" id="satir6_text1"
+              >motivated students who come together to explore the
+              intersection</span
+            >
+            <span class="satir" id="satir7_text1"
+              >of science, technology, engineering, and creativity. As of
+              2023,</span
+            >
+            <span class="satir" id="satir8_text1"
+              >VolTRan is composed of 20 members, divided into Mechanical,</span
+            >
+            <span class="satir" id="satir9_text1"
+              >Software, PR, and Management sub-teams. Our mission goes</span
+            >
+            <span class="satir" id="satir10_text1"
+              >beyond robotics. We aim to cultivate leadership, collaboration,
+              and</span
+            >
+            <span class="satir" id="satir11_text1"
+              >innovation through hands-on experience and global
+              competition.</span
+            >
+            <span class="satir" id="satir12_text1"
+              >Every robot we build, every code we write, and every connection
+              we</span
+            >
+            <span class="satir" id="satir13_text1"
+              >make is driven by a desire to learn and lead.</span
+            >
+          </p>
+        </article>
+      </section>
+
+      <!-- HOW WE WORK -->
+      <section class="row workflow">
+        <article class="text-div">
+          <h1 class="large-title">HOW WE WORK?</h1>
+          <p class="text" id="text2">
+            <span class="satir" id="satir1_text2"
+              >At VolTRan, our workflow is structured yet flexible, inspired by
+              real-</span
+            >
+            <span class="satir" id="satir2_text2"
+              >world engineering and product development cycles. We
+              operate</span
+            >
+            <span class="satir" id="satir3_text2"
+              >under a five-step iterative model:</span
+            >
+          </p>
+        </article>
+        <div class="svgObject" id="object1"></div>
+      </section>
+
+      <section class="row workflow team">
+        <article class="text-div">
+          <h1 class="large-title">OUR TEAM STRUCTURE</h1>
+          <p class="text" id="text3">
+            <span class="satir" id="satir1_text3"
+              >VolTRan is more than the sum of its parts. Each sub-team plays a
+              vital role:
+            </span>
+          </p>
+        </article>
+      </section>
+
+      <section class="row workflow structure">
+        <div class="cards-wrapper">
+          <div class="card">
+            <img class="lion" src="/photos/photo2.png" />
+            <h3>Mechanical Team</h3>
+            <p>
+              12 members designing and building the robot using Fusion 360 &amp;
+              SolidWorks.
+            </p>
+          </div>
+          <div class="card">
+            <img class="lion" src="/photos/photo3.png" />
+            <h3>Software Team</h3>
+            <p>Develops autonomous and driver-controlled systems in C++.</p>
+          </div>
+          <div class="card">
+            <img class="lion" src="/photos/photo4.png" />
+            <h3>PR Team</h3>
+            <p>
+              Manages social media, outreach, and sponsorships to boost team
+              visibility.
+            </p>
+          </div>
+          <div class="card">
+            <img class="lion" src="/photos/photo5.png" />
+            <h3>Drive Team</h3>
+            <p>
+              Our drive team have full control of the robot throughout the race.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- GEARS SHOWCASE -->
+      <section class="row">
+        <figure class="gear-canvas-wrapper2" id="gear-wrapper2"></figure>
+      </section>
+    </main>
+
+    <!-- FOOTER (Opsiyonel olarak eklenebilir) -->
+    <footer>
+      <div class="space"></div>
+    </footer>
+
+    <!-- JS -->
+    <script src="src/indexedDB.js"></script>
+    <script src="src/gears.js"></script>
+    <!-- <script src="src/console.js"></script> -->
+    <script src="src/scroll.js"></script>
+    <script src="src/clickActions.js"></script>
+    <script src="src/svg.js"></script>
+    <script src="src/star.js"></script>
+  </body>
+</html>
