@@ -15,18 +15,16 @@ function onScroll() {
 
   scroll = screen.scrollTop;
 
-  // Navbar küçültme / büyütme
   if (scroll > 0) {
     navbar.classList.add("scrolled");
+    logo.classList.add("scrolled");
+    logoTitle.classList.add("scrolled");
   } else {
     navbar.classList.remove("scrolled");
+    logo.classList.remove("scrolled");
+    logoTitle.classList.remove("scrolled");
   }
 
-  logo.style.width = scroll > 0 ? "70px" : "80px";
-  logo.style.height = scroll > 0 ? "70px" : "80px";
-  logoTitle.style.fontSize = scroll > 0 ? "15px" : "20px";
-
-  // Satır highlight işlemleri
   for (let i = 0; i < ranges.length; i++) {
     const { start, end, lines } = ranges[i];
     const span = Math.max(end - start, 1);

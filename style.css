@@ -18,9 +18,7 @@
   --my: 50vh;
   --size: 220px;
   --gap: clamp(0.5rem, 2vw, 2rem);
-  /* menü öğeleri arası boşluk */
   --underline: 3px;
-  /* alt çizgi kalınlığı */
   --padding-button-y: clamp(8px, 0.8vw, 6px);
   --padding-button-x: clamp(8px, 1vw, 12px);
 }
@@ -46,11 +44,8 @@ body {
 
 :root {
   --gap: 2rem;
-  /* menü öğeleri arası boşluk */
   --baseline: 1px;
-  /* alttaki sabit ince çizgi */
   --underline: 3px;
-  /* genişleyen çizgi kalınlığı */
 }
 
 /* GENEL */
@@ -91,33 +86,35 @@ header.navbar {
   align-items: center;
   padding: 0 40px;
   z-index: 10;
-  transition: height 0.5s, box-shadow 0.5s, padding 0.5s;
+  transition: height 0.5s, box-shadow 0.5s, padding 0.5s, background-color 0.5s;
   box-shadow: none;
   outline: none;
 }
 
-.header.navbar.scrolled {
+.navbar.nav-wrap.scrolled {
   background-color: #0e0e0e;
   box-shadow: 0 0 10px rgba(0, 0, 0, 1);
   height: 80px;
 }
 
-/* LOGO */
 header .logo-div {
   display: flex;
   align-items: center;
   gap: 2px;
   justify-content: flex-start;
-  /* sola yaslamak için */
   outline: none;
 }
 
 header .logo {
-  width: 50px;
-  /* önceki 80px */
-  height: 50px;
+  width: 70px;
+  height: 70px;
   transition: width 0.5s, height 0.5s;
   outline: none;
+}
+
+.logo.scrolled {
+  width: 60px;
+  height: 60px;
 }
 
 header .logo-title {
@@ -129,7 +126,10 @@ header .logo-title {
   outline: none;
 }
 
-/* NAV WRAP ve ALT ÇİZGİ */
+.logo-title.scrolled {
+  font-size: 15px;
+}
+
 .nav-wrap {
   position: relative;
   background: transparent;
@@ -146,11 +146,8 @@ b .nav-wrap::after {
 .menu {
   display: flex;
   flex-wrap: wrap;
-  /* küçük ekranlarda alt satıra geçer */
   gap: 2vw;
-  /* öğeler arası boşluk responsive */
   justify-content: center;
-  /* veya flex-start */
 }
 
 /* MENÜ TITLE */
@@ -167,7 +164,6 @@ b .nav-wrap::after {
   color: #b3b3b3;
   opacity: 0.9;
   font-size: 15px;
-  /* sabit font boyutu */
   font-weight: 400;
   transition: color 0.3s, text-shadow 0.3s, opacity 0.3s;
   outline: none;
@@ -206,7 +202,6 @@ b .nav-wrap::after {
   position: relative;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
-  /* sabit font boyutu */
   font-weight: 400;
   padding: var(--padding-button-y) var(--padding-button-x);
   border: none;
@@ -321,25 +316,19 @@ section.row {
 .row.about {
   display: flex;
   align-items: flex-start;
-  /* üst hizalı olsun */
   justify-content: space-between;
-  /* biri sol, biri sağ */
   gap: 2rem;
-  /* aralarına boşluk bırak */
   outline: none;
 }
 
 .row.about aside {
   flex-shrink: 0;
-  /* ikon sıkışmasın */
   outline: none;
 }
 
 .row.about article {
   margin-left: auto;
-  /* aside’dan ayrılıp sağa sabitlenir */
   max-width: 600px;
-  /* yazının taşmaması için genişlik sınırı */
   outline: none;
 }
 
@@ -399,11 +388,8 @@ footer {
 
 .svgObject svg {
   width: 100%;
-  /* kapsayıcının genişliğini doldurur */
   height: auto;
-  /* oranı korur */
   max-width: 400px;
-  /* opsiyonel: en fazla 400px genişlik */
 }
 
 .svgObject {
@@ -831,7 +817,6 @@ footer {
     gap: 0.5rem;
   }
 
-  /* burada .menu .contact-button olmalı */
   .menu a.title,
   .menu .contact-button {
     font-size: 13px;
@@ -867,11 +852,8 @@ footer {
   border-radius: 20px;
   text-align: center;
   flex: 1 1 250px;
-  /* başlangıç genişliği */
   aspect-ratio: 391 / 630;
-  /* oran sabit */
   max-width: 450px;
-  /* orijinal genişliği korumak için */
   padding: 2rem;
   padding-top: 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -905,9 +887,6 @@ footer {
   border-radius: 50%;
   margin-bottom: 2rem;
   display: block;
-  /* inline yerine block yap */
   margin-left: auto;
-  /* ortalamak için */
   margin-right: auto;
-  /* ortalamak için */
 }
