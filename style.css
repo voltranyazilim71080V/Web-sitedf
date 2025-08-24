@@ -334,7 +334,7 @@ section.row {
 
 /* INSTAGRAM */
 aside a img.instagram {
-  width: 400px;
+  width: 430px;
   transform: rotateZ(-3deg);
   margin-left: 20px;
   border-radius: 20px;
@@ -343,7 +343,7 @@ aside a img.instagram {
 }
 
 aside a img.instagram:hover {
-  width: 410px;
+  width: 450px;
   box-shadow: 0 0 20px rgb(179, 179, 179, 0.5);
 }
 
@@ -929,4 +929,13 @@ footer {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.row.frc {
+  justify-content: flex-start;
+}
+
+.row.vrc {
+  justify-content: flex-end;
+  margin-top: 30px;
 }

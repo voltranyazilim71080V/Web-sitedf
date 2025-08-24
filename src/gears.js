@@ -16,7 +16,7 @@ const camera = new THREE.PerspectiveCamera(
   wrapper.clientWidth / wrapper.clientHeight,
   0.01,
   1000,
-);
+);  
 camera.position.set(1, 0, 6);
 camera.lookAt(0, 0, 0);
 
@@ -47,11 +47,11 @@ scene.add(ambientLight);
 
 loader.setMeshoptDecoder(MeshoptDecoder);
 
-const colorMap = textureloader.load("texturex/texture1.jpg");
-const roughnessMap = textureloader.load("texturex/texture2.jpg");
-const metalnessMap = textureloader.load("texturex/texture3.jpg");
-const normalMap = textureloader.load("texturex/texture4.jpg");
-const displacementMap = textureloader.load("texturex/texture5.jpg");
+const colorMap = textureloader.load("texture2/texture1.jpg");
+const roughnessMap = textureloader.load("texture2/texture2.jpg");
+const metalnessMap = textureloader.load("texture2/texture3.jpg");
+const normalMap = textureloader.load("texture2/texture4.jpg");
+const displacementMap = textureloader.load("texture2/texture5.jpg");
 
 let direction = 1;
 
