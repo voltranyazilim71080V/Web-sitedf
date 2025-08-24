@@ -22,18 +22,16 @@ camera.lookAt(0, 0, 0);
 
 const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
 keyLight.position.set(5, 5, 5); // x, y, z
-keyLight.target.position.set(0, 0, 0); // çarkların ortasına bakıyor purna
+keyLight.target.position.set(0, 0, 0);
 scene.add(keyLight);
 scene.add(keyLight.target);
 
-// Fill light: sol üst ön, gölgeleri yumuşatır
 const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);
 fillLight.position.set(-5, 3, 2);
 fillLight.target.position.set(0, 0, 0);
 scene.add(fillLight);
 scene.add(fillLight.target);
 
-// Rim light / back light: üstten arkadan, objeyi arka plandan ayırır
 const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
 rimLight.position.set(0, 5, -5);
 rimLight.target.position.set(0, 0, 0);
@@ -43,7 +41,7 @@ scene.add(rimLight.target);
 const pointLight = new THREE.PointLight(0xffffff, 1);
 pointLight.position.set(0, 2.5, 5);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // mevcut
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 ambientLight.intensity = 0.8; // artır
 scene.add(ambientLight);
 
