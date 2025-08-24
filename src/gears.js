@@ -60,9 +60,9 @@ let direction = 1;
 const scale = 0.045;
 
 let gears = [
-  [null, [-1.1, -1, 0]],
-  [null, [0, 1, 0]],
-  [null, [1.53, 0.22, 0]],
+  [null, [ -1.1,   -1,   0 ]],
+  [null, [    0,    1,   0 ]],
+  [null, [ 1.53, 0.22,   0 ]],
 ];
 
 async function loadGear(num) {
