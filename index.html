@@ -1,261 +1,265 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/meshopt_decoder.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bezier-easing@2.1.0/dist/bezier-easing.min.js"></script>
-    <title>Voltran Robotics</title>
-  </head>
-  <body>
-    <div class="stars-container"></div>
-    <div class="meteor-container">
-      <div class="meteor-1"></div>
-      <div class="meteor-2"></div>
-      <div class="meteor-3"></div>
-      <div class="meteor-4"></div>
-      <div class="meteor-5"></div>
-      <div class="meteor-6"></div>
-      <div class="meteor-7"></div>
-      <div class="meteor-8"></div>
-      <div class="meteor-9"></div>
-      <div class="meteor-10"></div>
-      <div class="meteor-11"></div>
-      <div class="meteor-12"></div>
-      <div class="meteor-13"></div>
-      <div class="meteor-14"></div>
-      <div class="meteor-15"></div>
-    </div>
 
-    <!-- HEADER / NAV -->
-    <header class="navbar nav-wrap">
-      <div class="logo-div">
-        <img
-          class="logo"
-          src="/SVG/voltranLogo.svg"
-          alt="Voltran Robotics Logo"
-        />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/meshopt_decoder.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bezier-easing@2.1.0/dist/bezier-easing.min.js"></script>
+  <title>Voltran Robotics</title>
+</head>
+
+<body>
+  <div class="stars-container"></div>
+  <div class="meteor-container">
+    <div class="meteor-1"></div>
+    <div class="meteor-2"></div>
+    <div class="meteor-3"></div>
+    <div class="meteor-4"></div>
+    <div class="meteor-5"></div>
+    <div class="meteor-6"></div>
+    <div class="meteor-7"></div>
+    <div class="meteor-8"></div>
+    <div class="meteor-9"></div>
+    <div class="meteor-10"></div>
+    <div class="meteor-11"></div>
+    <div class="meteor-12"></div>
+    <div class="meteor-13"></div>
+    <div class="meteor-14"></div>
+    <div class="meteor-15"></div>
+  </div>
+
+  <!-- HEADER / NAV -->
+  <header class="navbar nav-wrap">
+    <div class="logo-div">
+      <a href="index.html">
+        <img class="logo" src="/SVG/voltranLogo.svg" alt="Voltran Robotics Logo" /></a>
+      <a href="index.html">
         <h1 class="logo-title">VOLTRAN ROBOTICS</h1>
+      </a>
+    </div>
+    <nav class="titles">
+      <ul class="menu">
+        <li><a class="title" href="#">Achievements</a></li>
+        <li><a class="title" href="#competitions">Competition</a></li>
+        <li><a class="title" href="#">Sponsorship</a></li>
+        <li><button class="contact-button">Contact us</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="screen">
+    <!-- HERO SECTION -->
+    <section class="first-row">
+      
+      <div class="main-titles">
+        <h1 class="large-title">PERTEVNIYAL<br />ROBOTICS</h1>
+        <h2 class="small-title">
+          We are competing in the high school category <br />of the Vex
+          competition.
+        </h2>
       </div>
-      <nav class="titles">
-        <ul class="menu">
-          <li><a class="title" href="#">Achievements</a></li>
-          <li><a class="title" href="#">Competition</a></li>
-          <li><a class="title" href="#">Sponsorship</a></li>
-          <li><button class="contact-button">Contact us</button></li>
-        </ul>
-      </nav>
-    </header>
+      <figure class="gear-canvas-wrapper" id="gear-wrapper"></figure>
+    </section>
 
-    <!-- MAIN CONTENT -->
-    <main class="screen">
-      <!-- HERO SECTION -->
-      <section class="first-row">
-        <div class="main-titles">
-          <h1 class="large-title">PERTEVNIYAL<br />ROBOTICS</h1>
-          <h2 class="small-title">
-            We are competing in the high school category <br />of the Vex
-            competition.
-          </h2>
-        </div>
-        <figure class="gear-canvas-wrapper" id="gear-wrapper"></figure>
-      </section>
+    <!-- ABOUT US -->
+    <section class="row about">
+      <aside>
+        <a href="https://www.instagram.com/voltranrobotics/" target="_blank" draggable="false">
+          <img class="instagram" id="photo1" src="/SVG/insta.svg" alt="Instagram Icon" draggable="false" /></a>
+      </aside>
+      <article class="text-div">
+        <h1 class="large-title">WHO WE ARE?</h1>
+        <p class="text" id="text1">
+          <span class="satir" id="satir1_text1">VolTRan Robotics is the official high school robotics team
+            of</span>
+          <span class="satir" id="satir2_text1">Pertevniyal High School, based in Istanbul, Turkey. We were</span>
+          <span class="satir" id="satir3_text1">established in 2017 as part of the globally renowned FRC
+            (FIRST</span>
+          <span class="satir" id="satir4_text1">Robotics Competition), and have been continuing our journey
+            since</span>
+          <span class="satir" id="satir5_text1">2021 in the VEX Robotics Competition. Our team consists of
+            highly</span>
+          <span class="satir" id="satir6_text1">motivated students who come together to explore the
+            intersection</span>
+          <span class="satir" id="satir7_text1">of science, technology, engineering, and creativity. As of
+            2023,</span>
+          <span class="satir" id="satir8_text1">VolTRan is composed of 20 members, divided into Mechanical,</span>
+          <span class="satir" id="satir9_text1">Software, PR, and Management sub-teams. Our mission goes</span>
+          <span class="satir" id="satir10_text1">beyond robotics. We aim to cultivate leadership, collaboration,
+            and</span>
+          <span class="satir" id="satir11_text1">innovation through hands-on experience and global
+            competition.</span>
+          <span class="satir" id="satir12_text1">Every robot we build, every code we write, and every connection
+            we</span>
+          <span class="satir" id="satir13_text1">make is driven by a desire to learn and lead.</span>
+        </p>
+      </article>
+    </section>
 
-      <!-- ABOUT US -->
-      <section class="row about">
-        <aside>
-          <a
-            href="https://www.instagram.com/voltranrobotics/"
-            target="_blank"
-            draggable="false"
-          >
-            <img
-              class="instagram"
-              id="photo1"
-              src="/SVG/insta.svg"
-              alt="Instagram Icon"
-              draggable="false"
-          /></a>
-        </aside>
-        <article class="text-div">
-          <h1 class="large-title">WHO WE ARE?</h1>
-          <p class="text" id="text1">
-            <span class="satir" id="satir1_text1"
-              >VolTRan Robotics is the official high school robotics team
-              of</span
-            >
-            <span class="satir" id="satir2_text1"
-              >Pertevniyal High School, based in Istanbul, Turkey. We were</span
-            >
-            <span class="satir" id="satir3_text1"
-              >established in 2017 as part of the globally renowned FRC
-              (FIRST</span
-            >
-            <span class="satir" id="satir4_text1"
-              >Robotics Competition), and have been continuing our journey
-              since</span
-            >
-            <span class="satir" id="satir5_text1"
-              >2021 in the VEX Robotics Competition. Our team consists of
-              highly</span
-            >
-            <span class="satir" id="satir6_text1"
-              >motivated students who come together to explore the
-              intersection</span
-            >
-            <span class="satir" id="satir7_text1"
-              >of science, technology, engineering, and creativity. As of
-              2023,</span
-            >
-            <span class="satir" id="satir8_text1"
-              >VolTRan is composed of 20 members, divided into Mechanical,</span
-            >
-            <span class="satir" id="satir9_text1"
-              >Software, PR, and Management sub-teams. Our mission goes</span
-            >
-            <span class="satir" id="satir10_text1"
-              >beyond robotics. We aim to cultivate leadership, collaboration,
-              and</span
-            >
-            <span class="satir" id="satir11_text1"
-              >innovation through hands-on experience and global
-              competition.</span
-            >
-            <span class="satir" id="satir12_text1"
-              >Every robot we build, every code we write, and every connection
-              we</span
-            >
-            <span class="satir" id="satir13_text1"
-              >make is driven by a desire to learn and lead.</span
-            >
-          </p>
-        </article>
-      </section>
+    <!-- HOW WE WORK -->
+    <section class="row workflow">
+      <article class="text-div">
+        <h1 class="large-title">HOW WE WORK?</h1>
+        <p class="text" id="text2">
+          <span class="satir" id="satir1_text2">At VolTRan, our workflow is structured yet flexible, inspired by
+            real-</span>
+          <span class="satir" id="satir2_text2">world engineering and product development cycles. We
+            operate</span>
+          <span class="satir" id="satir3_text2">under a five-step iterative model:</span>
+        </p>
+      </article>
+      <div class="svgObject" id="object1"></div>
+    </section>
 
-      <!-- HOW WE WORK -->
-      <section class="row workflow">
-        <article class="text-div">
-          <h1 class="large-title">HOW WE WORK?</h1>
-          <p class="text" id="text2">
-            <span class="satir" id="satir1_text2"
-              >At VolTRan, our workflow is structured yet flexible, inspired by
-              real-</span
-            >
-            <span class="satir" id="satir2_text2"
-              >world engineering and product development cycles. We
-              operate</span 
-            >
-            <span class="satir" id="satir3_text2"
-              >under a five-step iterative model:</span
-            >
-          </p>
-        </article>
-        <div class="svgObject" id="object1"></div>
-      </section>
+    <section class="row workflow team">
+      <article class="text-div">
+        <h1 class="large-title" id="structure">OUR TEAM STRUCTURE</h1>
+      </article>
+    </section>
 
-      <section class="row workflow team"> 
-        <article class="text-div">
-          <h1 class="large-title" id="structure">OUR TEAM STRUCTURE</h1>
-        </article>
-      </section>
-
-      <section class="row workflow structure">
-        <div class="cards-wrapper">
-          <div class="card" id="mechanic">
-            <div class="card-inner">
-              <div class="card-front" id="mechanic_front">
-                <img class="lion" src="/photos/photo2.png" />
-                <h3>Mechanical Team</h3>
-                <p>
-                  12 members designing and building the robot using Fusion 360 &amp;
-                  SolidWorks.
-                </p>
-              </div>
-              <div class="card-back"  id="mechanic_back">
-                <span>Kürşat KILINÇARSLAN</span>
-              </div>
+    <section class="row workflow structure">
+      <div class="cards-wrapper">
+        <div class="card" id="mechanic">
+          <div class="card-inner">
+            <div class="card-front" id="mechanic_front">
+              <img class="lion" src="/photos/photo2.png" />
+              <h3>Mechanical Team</h3>
+              <p>
+                12 members designing and building the robot using Fusion 360 &amp;
+                SolidWorks.
+              </p>
             </div>
-          </div>
-          <div class="card" id="software">
-            <div class="card-inner">
-              <div class="card-front" id="software_front">
-                <img class="lion" src="/photos/photo3.png" />
-                <h3>Software Team</h3>
-                <p>Develops autonomous and driver-controlled systems in C++.</p>
-              </div>
-              <div class="card-back" id="software_back">
-                <span>Kürşat KILINÇARSLAN</span>
-              </div>
-            </div>
-          </div>
-          <div class="card" id="pr">
-            <div class="card-inner">
-              <div class="card-front" id="pr_front">
-                <img class="lion" src="/photos/photo4.png" />
-                <h3>PR Team</h3>
-                <p>
-                  Manages social media, outreach, and sponsorships to boost team
-                  visibility.
-                </p>
-              </div>
-              <div class="card-back" id="pr_back">
-                <span>Kürşat KILINÇARSLAN</span>
-              </div>
-            </div>
-          </div>
-          <div class="card" id="drive">
-            <div class="card-inner">
-              <div class="card-front" id="drive_front">
-                <img class="lion" src="/photos/photo5.png" />
-                <h3>Drive Team</h3>
-                <p>
-                  Our drive team have full control of the robot throughout the race.
-                </p>
-              </div>
-              <div class="card-back" id="drive_back">
-                <span>Kürşat KILINÇARSLAN</span>
-              </div>
+            <div class="card-back" id="mechanic_back">
+              <span>Kürşat KILINÇARSLAN</span>
             </div>
           </div>
         </div>
-      </section>
+        <div class="card" id="software">
+          <div class="card-inner">
+            <div class="card-front" id="software_front">
+              <img class="lion" src="/photos/photo3.png" />
+              <h3>Software Team</h3>
+              <p>Develops autonomous and driver-controlled systems in C++.</p>
+            </div>
+            <div class="card-back" id="software_back">
+              <span>Kürşat KILINÇARSLAN</span>
+            </div>
+          </div>
+        </div>
+        <div class="card" id="pr">
+          <div class="card-inner">
+            <div class="card-front" id="pr_front">
+              <img class="lion" src="/photos/photo4.png" />
+              <h3>PR Team</h3>
+              <p>
+                Manages social media, outreach, and sponsorships to boost team
+                visibility.
+              </p>
+            </div>
+            <div class="card-back" id="pr_back">
+              <span>Kürşat KILINÇARSLAN</span>
+            </div>
+          </div>
+        </div>
+        <div class="card" id="drive">
+          <div class="card-inner">
+            <div class="card-front" id="drive_front">
+              <img class="lion" src="/photos/photo5.png" />
+              <h3>Drive Team</h3>
+              <p>
+                Our drive team have full control of the robot throughout the race.
+              </p>
+            </div>
+            <div class="card-back" id="drive_back">
+              <span>Kürşat KILINÇARSLAN</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <section class="row frc">
-        <article class="text-div">
-          <h1 class="large-title" id="mission">COMPETITIONS</h1>
-          <p class="text" id="text3">
-            <span class="satir" id="satir1_text3">FIRST Robotics Competition (FRC): A global program that combines the excitement of sport with the rigors of science and technology. FRC pushes us to solve real-world engineering challenges while promoting gracious professionalism. Each season, teams of students and mentors design, build, and program industrial-sized robots to compete in a themed game, requiring not only technical expertise but also creativity, teamwork, and strategic thinking. Beyond the competition itself, FRC fosters innovation, leadership, and collaboration, preparing students for future careers in STEM while building a strong sense of community and global connection.</span>
+    <section class="row competition">
+      <article>
+        <h1 class="large-title">COMPETITIONS</h1>
+      </article>
+    </section>
+
+    <!--COMPETITIONS-->
+    <section class="row frc" id="competitions">
+      <article class="text-div">
+        <h1 class="large-title" id="mission">FIRST ROBOTICS</h1>
+        <p class="text" id="text3">
+          <span class="satir" id="satir1_text3">FIRST Robotics Competition (FRC): A global program that combines</span>
+          <span class="satir" id="satir2_text3">the excitement of sport with the rigors of science and technology.</span>
+          <span class="satir" id="satir3_text3">FRC pushes us to solve real-world engineering challenges while</span>
+          <span class="satir" id="satir4_text3">promoting gracious professionalism. Each season, teams of students</span>
+          <span class="satir" id="satir5_text3">and mentors design, build, and program industrial-sized robots to</span>
+          <span class="satir" id="satir6_text3">compete in a themed game, requiring not only technical expertise</span>
+          <span class="satir" id="satir7_text3">but also creativity, teamwork, and strategic thinking. Beyond the</span>
+          <span class="satir" id="satir8_text3">competition itself, FRC fosters innovation, leadership, and</span>
+          <span class="satir" id="satir9_text3">collaboration, preparing students for future careers in STEM while</span>
+          <span class="satir" id="satir10_text3">building a strong sense of community and global connection.</span>
+        </p>
+      </article>
+      <div id="frc">
+
+      </div>
+    </section>
+
+    <section class="row vrc">
+      <div id="vrc">
+        
+      </div>
+      <article class="text-div">
+        <h1 class="large-title" id="mission">VEX ROBOTICS</h1>
+        <p class="text" id="text4">
+          <span class="satir" id="satir1_text4">VEX Robotics Competition (VRC): The largest and fastest-growing</span>
+          <span class="satir" id="satir2_text4">robotics competition in the world. VEX allows us to develop</span>
+          <span class="satir" id="satir3_text4">competitive robots within strict design constraints, encouraging</span>
+          <span class="satir" id="satir4_text4">creativity and resilience. Each season introduces a brand-new</span>
+          <span class="satir" id="satir5_text4">challenge, pushing teams to strategize, prototype, and refine their</span>
+          <span class="satir" id="satir6_text4">designs in order to outperform their opponents on the field. The</span>
+          <span class="satir" id="satir7_text4">competition not only strengthens engineering and programming</span>
+          <span class="satir" id="satir8_text4">skills but also teaches critical lessons in problem-solving,</span>
+          <span class="satir" id="satir9_text4">communication, and adaptability. Through collaboration with</span>
+          <span class="satir" id="satir10_text4">teammates and interaction with other teams worldwide, VRC builds</span>
+          <span class="satir" id="satir11_text4">a strong culture of innovation and teamwork, inspiring students to</span>
+          <span class="satir" id="satir12_text4">apply their knowledge beyond the competition arena.</span>
+        </p>
+      </article>
+    </section>
+
+    <section class="row achievements">
+      <article>
+        <h1 class="large-title">ACHIEVEMENTS</h1>
+          <p class="text" id="text">
+            <span class="satir" id="satir1_text5"></span>
           </p>
-        </article>
-      </section>
+        </h1>
+      </article>
+    </section>
 
-      <section class="row vrc">
-        <article class="text-div">
-          <h1 class="large-title" id="mission">COMPETITIONS</h1>
-          <p class="text" id="text3">
-            <span class="satir" id="satir1_text4">VEX Robotics Competition (VRC):
-The largest and fastest-growing robotics competition in the world. VEX allows us to develop competitive robots within strict design constraints, encouraging creativity and resilience.</span>
-          </p>
-        </article>
-      </section>
+    <!-- GEARS SHOWCASE -->
+    <section class="row">
+      <figure class="gear-canvas-wrapper2" id="gear-wrapper2"></figure>
+    </section>
+  </main>
 
-      <!-- GEARS SHOWCASE -->
-      <section class="row">
-        <figure class="gear-canvas-wrapper2" id="gear-wrapper2"></figure>
-      </section>
-    </main>
+  <!-- JS -->
+  <script src="src/indexedDB.js"></script>
+  <script src="src/gears.js"></script>
+  <!-- <script src="src/console.js"></script> -->
+  <script src="src/scroll.js"></script>
+  <script src="src/clickActions.js"></script>
+  <script src="src/competition.js"></script>
+  <!-- <script src="src/svg.js"></script> -->
+  <script src="src/star.js"></script>
+</body>
 
-    <!-- JS -->
-    <script src="src/indexedDB.js"></script>
-    <script src="src/gears.js"></script>
-    <!-- <script src="src/console.js"></script> -->
-    <script src="src/scroll.js"></script>
-    <script src="src/clickActions.js"></script>
-    <!-- <script src="src/svg.js"></script> -->
-    <script src="src/star.js"></script>
-  </body>
 </html>

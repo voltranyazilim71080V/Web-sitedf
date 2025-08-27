@@ -10,7 +10,8 @@ function onScroll() {
   const ranges = [
     { start: 456, end: 697, lines: 13 },
     { start: 1250, end: 1355, lines: 3 },
-    { start: 2550, end: 2955, lines: 10 },
+    { start: 2850, end: 3150, lines: 10 },
+    { start: 3300, end: 3555, lines: 12 }
   ];
 
   scroll = screen.scrollTop;

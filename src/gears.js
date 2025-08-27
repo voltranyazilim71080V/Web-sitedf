@@ -1,12 +1,9 @@
-const wrapper = document.getElementById("gear-wrapper");
+const wrapper = document.getElementById('gear-wrapper');
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 const canvas = renderer.domElement;
-const loader = new THREE.GLTFLoader();
-const textureloader = new THREE.TextureLoader();
-const rgbeLoader = new THREE.RGBELoader();
 
-renderer.setSize(wrapper.clientWidth, wrapper.clientHeight, false);
-renderer.setClearColor(0x0e0e0e, 0);
+renderer.setSize(wrapper.clientWidth, wrapper.clientHeight);
+renderer.outputEncoding = THREE.sRGBEncoding;
 wrapper.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
@@ -15,96 +12,106 @@ const camera = new THREE.PerspectiveCamera(
   45,
   wrapper.clientWidth / wrapper.clientHeight,
   0.01,
-  1000,
-);  
+  1000
+);
 camera.position.set(1, 0, 6);
 camera.lookAt(0, 0, 0);
 
-const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
-keyLight.position.set(5, 5, 5); // x, y, z
-keyLight.target.position.set(0, 0, 0);
-scene.add(keyLight);
-scene.add(keyLight.target);
+const rgbeLoader = new THREE.RGBELoader();
+rgbeLoader.setDataType(THREE.UnsignedByteType); // r128’de genellikle gerekli
+rgbeLoader.load('/texture/light.hdr', (texture) => {
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    scene.environment = texture;
+});
 
-const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);
-fillLight.position.set(-5, 3, 2);
-fillLight.target.position.set(0, 0, 0);
-scene.add(fillLight);
-scene.add(fillLight.target);
-
-const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
-rimLight.position.set(0, 5, -5);
-rimLight.target.position.set(0, 0, 0);
-scene.add(rimLight);
-scene.add(rimLight.target);
-
-const pointLight = new THREE.PointLight(0xffffff, 1);
-pointLight.position.set(0, 2.5, 5);
-
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-ambientLight.intensity = 0.8; // artır
-scene.add(ambientLight);
-
+const loader = new THREE.GLTFLoader();
 loader.setMeshoptDecoder(MeshoptDecoder);
-
-const colorMap = textureloader.load("texture2/texture1.jpg");
-const roughnessMap = textureloader.load("texture2/texture2.jpg");
-const metalnessMap = textureloader.load("texture2/texture3.jpg");
-const normalMap = textureloader.load("texture2/texture4.jpg");
-const displacementMap = textureloader.load("texture2/texture5.jpg");
-
 let direction = 1;
 
-const scale = 0.045;
+const textureLoader = new THREE.TextureLoader();
 
-let gears = [
-  [null, [ -1.1,   -1,   0 ]],
-  [null, [    0,    1,   0 ]],
-  [null, [ 1.53, 0.22,   0 ]],
-];
+async function loadAllAssets(fileList) {
+  const textureLoader = new THREE.TextureLoader();
+  const rgbeLoader = new THREE.RGBELoader();
+  const gltfLoader = new THREE.GLTFLoader();
 
-async function loadGear(num) {
-  const url = num == 0 ? "/GLB/large-gear.glb" : "/GLB/small-gear.glb";
-  const arrayBuffer = await getFromDB(url);
+  const assets = {}; // Yüklenecek dosyaların saklanacağı obje
 
-  if (!arrayBuffer) return console.error("File not found in cache:", url);
+  for (let i = 0; i < fileList.length; i++) {
+    const { key, url, type } = fileList[i];
+    const file = await getFile(key);
 
-  const blob = new Blob([arrayBuffer], { type: "model/gltf-binary" });
-  const blobUrl = URL.createObjectURL(blob);
+    if (!file) continue;
 
-  loader.load(blobUrl, (gltf) => {
-    gears[num][0] = gltf.scene;
-    gears[num][0].scale.set(scale, scale, scale);
-    gears[num][0].position.set(
-      gears[num][1][0],
-      gears[num][1][1],
-      gears[num][1][2],
-    );
-    gears[num][0].rotation.set(
-      THREE.MathUtils.degToRad(90),
-      THREE.MathUtils.degToRad(num == 0 ? 185 : 180),
-      THREE.MathUtils.degToRad(0),
-    );
-
-    gears[num][0].traverse(function (child) {
-      if (child.isMesh) {
-        child.material = new THREE.MeshStandardMaterial({
-          map: colorMap,
-          roughnessMap: roughnessMap,
-          metalnessMap: metalnessMap,
-          normalMap: normalMap,
-          displacementMap: displacementMap,
-          displacementScale: 0.01, // küçük tut
-          metalness: 0.6, // maksimum metal hissi
-          roughness: 1, // parlaklığı artır
-          color: 0xffcc18, // sarı overlay istemezsen beyaz yap
+    if (type === "glb") {
+      const blob = new Blob([file], { type: "model/gltf-binary" });
+      const blobURL = URL.createObjectURL(blob);
+      assets[key] = await new Promise((resolve) => {
+        gltfLoader.load(blobURL, (gltf) => resolve(gltf.scene));
+      });
+    } 
+    else if (type === "hdr") {
+      const blob = new Blob([file], { type: "application/octet-stream" });
+      const blobURL = URL.createObjectURL(blob);
+      assets[key] = await new Promise((resolve) => {
+        rgbeLoader.load(blobURL, (texture) => {
+          texture.mapping = THREE.EquirectangularReflectionMapping;
+          resolve(texture);
         });
-      }
-    });
+      });
+    } 
+    else if (type === "texture") {
+      const blobURL = URL.createObjectURL(file);
+      assets[key] = textureLoader.load(blobURL);
+    }
+  }
 
-    scene.add(gears[num][0]);
-  });
+  return assets;
 }
+
+loadAllAssets(files).then((assets) => {
+    if (assets.baseColor) assets.baseColor.encoding = THREE.sRGBEncoding;
+
+    const scale = 0.045;
+
+    let gears = [
+      [assets.model1, [-1.1, -0.5, 0]],
+      [assets.model2, [0, 1.5, 0]],
+      [assets.model3, [1.53, 0.72, 0]],
+    ];
+
+    for (let i = 0; i < gears.length; i++) {
+      const gear = gears[i][0];
+      const pos = gears[i][1];
+
+      if (!gear) continue;
+
+      gear.scale.set(scale, scale, scale);
+      gear.position.set(...pos);
+      gear.rotation.set(
+        THREE.MathUtils.degToRad(90),
+        THREE.MathUtils.degToRad(185),
+        0
+      );
+
+      gear.traverse((child) => {
+        if (child.isMesh) {
+          child.material = new THREE.MeshStandardMaterial({
+            map: assets.baseColor || null,
+            normalMap: assets.normalMap || null,
+            roughnessMap: assets.roughnessMap || null,
+            metalnessMap: assets.metalnessMap || null,
+            metalness: 0.5,
+            roughness: 0.7,
+            color: 0xffcc18
+          });
+        }
+      });
+
+      scene.add(gear);
+    }
+  });
+
 
 function onResize() {
   const width = wrapper.clientWidth;
@@ -133,10 +140,6 @@ function animate() {
   }
 
   renderer.render(scene, camera);
-}
-
-for (let i = 0; i < 3; i++) {
-  loadGear(i);
 }
 
 animate();

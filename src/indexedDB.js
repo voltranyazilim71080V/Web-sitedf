@@ -1,71 +1,66 @@
 function openDB() {
-    return new Promise((resolve, reject) => {
-        const request = indexedDB.open("glbCacheDB", 1);
-        request.onupgradeneeded = (event) => {
-            event.target.result.createObjectStore("files");
-        };
-        request.onsuccess = (event) => resolve(event.target.result);
-        request.onerror = (event) => reject(event.target.error);
-    });
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("assetsDB", 1);
+
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains("files")) {
+        db.createObjectStore("files");
+      }
+    };
+
+    request.onsuccess = (event) => {
+      resolve(event.target.result);
+    };
+
+    request.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
 }
 
-async function saveToDB(key, arrayBuffer) {
-    const db = await openDB();
-    return new Promise((resolve, reject) => {
-        const tx = db.transaction("files", "readwrite");
-        tx.objectStore("files").put(arrayBuffer, key);
-        tx.oncomplete = () => resolve();
-        tx.onerror = () => reject(tx.error);
-    });
+async function saveFile(key, file) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("files", "readwrite");
+    const store = tx.objectStore("files");
+    store.put(file, key);
+    tx.oncomplete = () => resolve(true);
+    tx.onerror = (e) => reject(e);
+  });
 }
 
-async function getFromDB(key) {
-    const db = await openDB();
-    return new Promise((resolve, reject) => {
-        const tx = db.transaction("files", "readonly");
-        const request = tx.objectStore("files").get(key);
-        request.onsuccess = () => resolve(request.result);
-        request.onerror = () => reject(request.error);
-    });
-}
-
-async function fetchBinary(url) {
+async function cacheFiles(fileList) {
+  for (let i = 0; i < fileList.length; i++) {
+    const { key, url } = fileList[i];
     const response = await fetch(url);
-    return await response.arrayBuffer();
-}
+    let file;
 
-async function cacheFiles(files) {
-    for (let url of files) {
-        const existing = await getFromDB(url);
-        if (!existing) {
-            const data = await fetchBinary(url);
-            await saveToDB(url, data);
-            console.log("Cached:", url);
-        } else {
-            console.log("Already cached:", url);
-        }
+    if (url.endsWith(".glb") || url.endswith(".hdr")) {
+      file = await response.arrayBuffer();
+    } else if (url.match(/\.(png|jpg|jpeg)$/)) {
+      file = await response.blob();
+    } else {
+      continue; // desteklenmeyen dosya tipi
     }
+
+    await saveFile(key, file);
+    console.log(`${key} cachelendi`);
+  }
 }
 
-// GLB ve Texture Listesi
-const GLB_FILES = [
-    "/GLB/large-gear.glb",
-    "/GLB/small-gear.glb",
-    "/GLB/console.glb",
+const files = [
+  { key: "large-gear", url: "/GLB/large-gear.glb", type: "glb" },
+  { key: "small-gear", url: "/GLB/small-gear.glb", type: "glb" },
+  { key: "vrc_element_1", url: "/GLB/vrc_element_1.glb", type: "glb" },
+  { key: "vrc_element_2", url: "/GLB/vrc_element_2.glb", type: "glb" },
+  { key: "vrc_element_3", url: "/GLB/vrc_element_3.glb", type: "glb" },
+  { key: "frc_element_1", url: "/GLB/vrc_element_4.glb", type: "glb" },
+  { key: "light", url: "/textures/light.hdr", type: "hdr" },
+  { key: "baseColor", url: "/textures/baseColor.jpg", type: "texture" },
+  { key: "metallic", url: "/textures/metallic.jpg", type: "texture" },
+  { key: "normal", url: "/textures/normal.jpg", type: "texture" },
+  { key: "roughness", url: "/textures/roughness.jpg", type: "texture" },
 ];
 
-const TEXTURE_FILES = [
-    "/texture2/texture1.jpg",
-    "/texture2/texture2.jpg",
-    "/texture2/texture3.jpg",
-    "/texture2/texture4.jpg",
-    "/texture2/texture5.jpg",
-];
-
-const ALL_FILES = [...GLB_FILES, ...TEXTURE_FILES];
-
-async function init() {
-    await cacheFiles(ALL_FILES);
-}
-
-init();
+cacheFiles(files).then(() => console.log("Tüm dosyalar cachelendi"));
