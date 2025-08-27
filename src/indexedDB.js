@@ -9,13 +9,20 @@ function openDB() {
       }
     };
 
-    request.onsuccess = (event) => {
-      resolve(event.target.result);
-    };
+    request.onsuccess = (event) => resolve(event.target.result);
+    request.onerror = (event) => reject(event.target.error);
+  });
+}
 
-    request.onerror = (event) => {
-      reject(event.target.error);
-    };
+async function getFileFromDB(key) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("files", "readonly");
+    const store = tx.objectStore("files");
+    const request = store.get(key);
+
+    request.onsuccess = () => resolve(request.result || null);
+    request.onerror = (e) => reject(e);
   });
 }
 
@@ -33,15 +40,29 @@ async function saveFile(key, file) {
 async function cacheFiles(fileList) {
   for (let i = 0; i < fileList.length; i++) {
     const { key, url } = fileList[i];
-    const response = await fetch(url);
-    let file;
 
-    if (url.endsWith(".glb") || url.endswith(".hdr")) {
+    // Eğer zaten cache’te varsa tekrar indirme
+    const cached = await getFileFromDB(key);
+    if (cached) {
+      console.log(`${key} zaten cache’de`);
+      continue;
+    }
+
+    // Dosyayı fetch et
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.warn(`Dosya alınamadı: ${url}`);
+      continue;
+    }
+
+    let file;
+    if (typeof url === "string" && (url.endsWith(".glb") || url.endsWith(".hdr"))) {
       file = await response.arrayBuffer();
-    } else if (url.match(/\.(png|jpg|jpeg)$/)) {
+    } else if (typeof url === "string" && (url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg"))) {
       file = await response.blob();
     } else {
-      continue; // desteklenmeyen dosya tipi
+      console.warn(`Desteklenmeyen dosya tipi: ${url}`);
+      continue;
     }
 
     await saveFile(key, file);
@@ -49,18 +70,19 @@ async function cacheFiles(fileList) {
   }
 }
 
+// Örnek dosya listesi
 const files = [
   { key: "large-gear", url: "/GLB/large-gear.glb", type: "glb" },
   { key: "small-gear", url: "/GLB/small-gear.glb", type: "glb" },
   { key: "vrc_element_1", url: "/GLB/vrc_element_1.glb", type: "glb" },
   { key: "vrc_element_2", url: "/GLB/vrc_element_2.glb", type: "glb" },
   { key: "vrc_element_3", url: "/GLB/vrc_element_3.glb", type: "glb" },
-  { key: "frc_element_1", url: "/GLB/vrc_element_4.glb", type: "glb" },
-  { key: "light", url: "/textures/light.hdr", type: "hdr" },
-  { key: "baseColor", url: "/textures/baseColor.jpg", type: "texture" },
-  { key: "metallic", url: "/textures/metallic.jpg", type: "texture" },
-  { key: "normal", url: "/textures/normal.jpg", type: "texture" },
-  { key: "roughness", url: "/textures/roughness.jpg", type: "texture" },
+  { key: "frc_element_1", url: "/GLB/frc_element_1.glb", type: "glb" },
+  { key: "light", url: "/texture/light.hdr", type: "hdr" },
+  { key: "baseColor", url: "/texture/baseColor.jpg", type: "texture" },
+  { key: "metallic", url: "/texture/metallic.jpg", type: "texture" },
+  { key: "normal", url: "/texture/normal.png", type: "texture" },
+  { key: "roughness", url: "/texture/roughness.jpg", type: "texture" },
 ];
 
 cacheFiles(files).then(() => console.log("Tüm dosyalar cachelendi"));

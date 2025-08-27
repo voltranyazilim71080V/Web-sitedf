@@ -31,43 +31,47 @@ let direction = 1;
 const textureLoader = new THREE.TextureLoader();
 
 async function loadAllAssets(fileList) {
-  const textureLoader = new THREE.TextureLoader();
-  const rgbeLoader = new THREE.RGBELoader();
-  const gltfLoader = new THREE.GLTFLoader();
-
-  const assets = {}; // Yüklenecek dosyaların saklanacağı obje
-
+  const assets = {};
   for (let i = 0; i < fileList.length; i++) {
-    const { key, url, type } = fileList[i];
-    const file = await getFile(key);
+    const { key, type } = fileList[i];
+    const file = await getFileFromDB(key); // <- cache’den al
 
-    if (!file) continue;
+    if (!file) {
+      console.warn(`${key} cache’de yok, yüklenemedi`);
+      continue;
+    }
 
     if (type === "glb") {
       const blob = new Blob([file], { type: "model/gltf-binary" });
       const blobURL = URL.createObjectURL(blob);
       assets[key] = await new Promise((resolve) => {
-        gltfLoader.load(blobURL, (gltf) => resolve(gltf.scene));
+        const loader = new THREE.GLTFLoader();
+        loader.load(blobURL, (gltf) => resolve(gltf.scene));
       });
-    } 
-    else if (type === "hdr") {
+    } else if (type === "hdr") {
       const blob = new Blob([file], { type: "application/octet-stream" });
       const blobURL = URL.createObjectURL(blob);
       assets[key] = await new Promise((resolve) => {
-        rgbeLoader.load(blobURL, (texture) => {
+        const loader = new THREE.RGBELoader();
+        loader.load(blobURL, (texture) => {
           texture.mapping = THREE.EquirectangularReflectionMapping;
           resolve(texture);
         });
       });
-    } 
-    else if (type === "texture") {
+    } else if (type === "texture") {
       const blobURL = URL.createObjectURL(file);
-      assets[key] = textureLoader.load(blobURL);
+      assets[key] = new THREE.TextureLoader().load(blobURL);
     }
   }
-
   return assets;
 }
+
+let gearDOM = {
+  gear1: null,
+  gear2: null,
+  gear3: null
+};
+
 
 loadAllAssets(files).then((assets) => {
     if (assets.baseColor) assets.baseColor.encoding = THREE.sRGBEncoding;
@@ -75,9 +79,9 @@ loadAllAssets(files).then((assets) => {
     const scale = 0.045;
 
     let gears = [
-      [assets.model1, [-1.1, -0.5, 0]],
-      [assets.model2, [0, 1.5, 0]],
-      [assets.model3, [1.53, 0.72, 0]],
+      [assets["large-gear"], [-1.1, -0.5, 0]],
+      [assets["small-gear"].clone(), [0, 1.5, 0]],
+      [assets["small-gear"].clone(), [1.53, 0.72, 0]],
     ];
 
     for (let i = 0; i < gears.length; i++) {
@@ -109,6 +113,7 @@ loadAllAssets(files).then((assets) => {
       });
 
       scene.add(gear);
+      gearDOM[`gear${i + 1}`] = gear;
     }
   });
 
