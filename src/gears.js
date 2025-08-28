@@ -18,7 +18,7 @@ camera.position.set(1, 0, 6);
 camera.lookAt(0, 0, 0);
 
 const rgbeLoader = new THREE.RGBELoader();
-rgbeLoader.setDataType(THREE.UnsignedByteType); // r128’de genellikle gerekli
+rgbeLoader.setDataType(THREE.UnsignedByteType);
 rgbeLoader.load('/texture/light.hdr', (texture) => {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     scene.environment = texture;
@@ -32,39 +32,62 @@ const textureLoader = new THREE.TextureLoader();
 
 async function loadAllAssets(fileList) {
   const assets = {};
-  for (let i = 0; i < fileList.length; i++) {
-    const { key, type } = fileList[i];
-    const file = await getFileFromDB(key); // <- cache’den al
+  const missingFiles = [];
 
-    if (!file) {
-      console.warn(`${key} cache’de yok, yüklenemedi`);
-      continue;
+  for (const {key, url, type} of fileList) {
+    const file = await getFileFromDB(key);
+    if (file) {
+      assets[key] = { file, type, fromCache: true };
+    } else {
+      missingFiles.push({key, url, type});
     }
+  }
 
+  await Promise.all(missingFiles.map(async ({key, url, type}) => {
+    let loadedData;
+
+    if (type === "glb" || type === "hdr" || type === "texture") {
+      const response = await fetch(url);
+      loadedData = await response.arrayBuffer();
+      
+      await saveFile(key, loadedData);
+      assets[key] = { file: loadedData, type, fromCache: false };
+    }
+  }));
+
+  const threeAssets = {};
+  for (const key in assets) {
+    const { file, type } = assets[key];
     if (type === "glb") {
       const blob = new Blob([file], { type: "model/gltf-binary" });
-      const blobURL = URL.createObjectURL(blob);
-      assets[key] = await new Promise((resolve) => {
+      const url = URL.createObjectURL(blob);
+      threeAssets[key] = await new Promise(resolve => {
         const loader = new THREE.GLTFLoader();
-        loader.load(blobURL, (gltf) => resolve(gltf.scene));
+        loader.load(url, gltf => resolve(gltf.scene));
       });
     } else if (type === "hdr") {
       const blob = new Blob([file], { type: "application/octet-stream" });
-      const blobURL = URL.createObjectURL(blob);
-      assets[key] = await new Promise((resolve) => {
-        const loader = new THREE.RGBELoader();
-        loader.load(blobURL, (texture) => {
-          texture.mapping = THREE.EquirectangularReflectionMapping;
-          resolve(texture);
-        });
+      const url = URL.createObjectURL(blob);
+      threeAssets[key] = await new Promise(resolve => {
+        const loader = new THREE.RGBELoader()
+          .setDataType(THREE.UnsignedByteType)
+          .load(url, texture => {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            resolve(texture);
+          });
       });
     } else if (type === "texture") {
-      const blobURL = URL.createObjectURL(file);
-      assets[key] = new THREE.TextureLoader().load(blobURL);
+      const blob = new Blob([file]);
+      const url = URL.createObjectURL(blob);
+      threeAssets[key] = await new Promise(resolve => {
+        new THREE.TextureLoader().load(url, tex => resolve(tex));
+      });
     }
   }
-  return assets;
+
+  return threeAssets;
 }
+
 
 let gearDOM = {
   gear1: null,
@@ -77,12 +100,18 @@ loadAllAssets(files).then((assets) => {
     if (assets.baseColor) assets.baseColor.encoding = THREE.sRGBEncoding;
 
     const scale = 0.045;
-
-    let gears = [
-      [assets["large-gear"], [-1.1, -0.5, 0]],
-      [assets["small-gear"].clone(), [0, 1.5, 0]],
-      [assets["small-gear"].clone(), [1.53, 0.72, 0]],
-    ];
+    let gears = [];
+  
+    if (assets["large-gear"]) {
+        gears.push([assets["large-gear"], [-1.1, -0.5, 0]]);
+    }
+  
+    if (assets["small-gear"]) {
+        gears.push([assets["small-gear"].clone(), [0, 1.5, 0]]);
+        gears.push([assets["small-gear"].clone(), [1.53, 0.72, 0]]);
+    } else {
+        console.warn("small-gear cache'de yok!");
+    }
 
     for (let i = 0; i < gears.length; i++) {
       const gear = gears[i][0];
@@ -107,7 +136,7 @@ loadAllAssets(files).then((assets) => {
             metalnessMap: assets.metalnessMap || null,
             metalness: 0.5,
             roughness: 0.7,
-            color: 0xffcc18
+            color: 0xffc800
           });
         }
       });
@@ -132,16 +161,16 @@ onResize();
 function animate() {
   requestAnimationFrame(animate);
 
-  if (gears[0][0] && gears[1][0] && gears[2][0]) {
-    if (direction === 1) {
-      gears[0][0].rotation.y += 0.006108;
-      gears[1][0].rotation.y -= 0.01;
-      gears[2][0].rotation.y += 0.01;
-    } else {
-      gears[0][0].rotation.y -= 0.006108;
-      gears[1][0].rotation.y += 0.01;
-      gears[2][0].rotation.y -= 0.01;
-    }
+  if (gearDOM.gear1 && gearDOM.gear2 && gearDOM.gear3) {
+      if (direction === 1) {
+          gearDOM.gear1.rotation.y += 0.006108;
+          gearDOM.gear2.rotation.y -= 0.01;
+          gearDOM.gear3.rotation.y += 0.01;
+      } else {
+          gearDOM.gear1.rotation.y -= 0.006108;
+          gearDOM.gear2.rotation.y += 0.01;
+          gearDOM.gear3.rotation.y -= 0.01;
+      }
   }
 
   renderer.render(scene, camera);
