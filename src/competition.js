@@ -2,7 +2,7 @@ let loadElements = [
   { 
     url: '/GLB/vrc_element_1.glb',
     scale: [30, 30, 30],
-    position: [0, 0, -0.2],
+    position: [0, 0, -4],
     rotation: [0, 45, 45],
     element: null
   }/*,
@@ -108,5 +108,4 @@ function createScene(wrapperId, loadElements) {
   return {scene, camera, renderer, elements: loadElements};
 }
 
-window.FRC = createScene('frc', FRCloadElements);
 window.VRC = createScene('vrc', loadElements);

@@ -125,19 +125,27 @@ loadAllAssets(files).then((assets) => {
         THREE.MathUtils.degToRad(90),
         THREE.MathUtils.degToRad(185),
         0
-      );
+      );const sharedMat = new THREE.MeshStandardMaterial({
+        map: assets.baseColor,
+        normalMap: assets.normalMap,
+        roughnessMap: assets.roughnessMap,
+        metalnessMap: assets.metalnessMap,
+        metalness: 1.0,
+        roughness: 0.7,
+        color: 0xffc800
+      });
+
+      [sharedMat.map, sharedMat.normalMap, sharedMat.roughnessMap, sharedMat.metalnessMap].forEach(tex => {
+        if (tex) {
+          tex.encoding = THREE.sRGBEncoding;
+          tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+          tex.anisotropy = 4;
+        }
+      });
 
       gear.traverse((child) => {
         if (child.isMesh) {
-          child.material = new THREE.MeshStandardMaterial({
-            map: assets.baseColor || null,
-            normalMap: assets.normalMap || null,
-            roughnessMap: assets.roughnessMap || null,
-            metalnessMap: assets.metalnessMap || null,
-            metalness: 0.5,
-            roughness: 0.7,
-            color: 0xffc800
-          });
+          child.material = sharedMat;
         }
       });
 

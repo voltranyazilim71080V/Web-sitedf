@@ -334,6 +334,8 @@ section.row {
 .row.about aside {
   flex-shrink: 0;
   outline: none;
+  position: relative;
+  height: 100%;
 }
 
 .row.about article {
@@ -342,19 +344,36 @@ section.row {
   outline: none;
 }
 
+.instagram {
+  width: 360px;
+  box-shadow: 0 0 20px rgb(179, 179, 179, 0.5);
+}
+
 /* INSTAGRAM */
-aside a img.instagram {
-  width: 430px;
-  transform: rotateZ(-3deg);
+#photo1 {
+  position: absolute;
+  width: 330px;
+  transform: rotateZ(10deg);
+  margin-left: 60px;
+  border-radius: 20px;
+  transition: all 0.5s ease-out;
+  outline: none;
+  z-index: 1;
+  top: 130px;
+  left: 250px;
+}
+
+#photo2 {
+  position: absolute;
+  width: 330px;
+  transform: rotateZ(-10deg);
   margin-left: 20px;
   border-radius: 20px;
   transition: all 0.5s ease-out;
   outline: none;
-}
-
-aside a img.instagram:hover {
-  width: 450px;
-  box-shadow: 0 0 20px rgb(179, 179, 179, 0.5);
+  top: 0;
+  left: 50;
+  z-index: 0;
 }
 
 /* GEARS */
@@ -902,6 +921,11 @@ footer {
   transform: rotateY(180deg);
 }
 
+.card-inner:hover {
+  transform: rotateY(15deg);
+  cursor: pointer;
+}
+
 .card-front,
 .card-back {
   position: absolute;
@@ -948,6 +972,22 @@ footer {
   margin-right: auto;
 }
 
+#mechanic_back {
+  color: #ff4d4d;
+}
+
+#software_back {
+  color: #74c954;
+}
+
+#pr_back {
+  color: #ffcc18;
+}
+
+#drive_back {
+  color: #58aefe;
+}
+
 .row.frc {
   justify-content: flex-start;
   margin-top: 100px;
@@ -985,17 +1025,138 @@ section.row.competition {
 }
 
 
-/* #vrc kutusuna boyut verelim */
 #vrc {
-  flex: 1;                 /* gerektiğinde genişler */
-  min-width: 300px;        /* minimum genişlik */
-  height: 450px;           /* örnek yükseklik */
-  background: transparent; /* veya none */
+  flex: 1;                 
+  min-width: 300px;        
+  height: 470px;           
+  background: url("/photos/photo6.png") no-repeat; /* tekrar etmesini engelle */
+  background-size: cover;
+  background-position: center 0%;
+  overflow: hidden;
+  margin-right: 40px;
 }
+/*
+#vrc::before {
+  content: "";
+  position: absolute;
+  top: -20px; bottom: -20px;
+  left: -20px; right: -20px;
+  background: inherit;
+  filter: blur(0px);
+  z-index: 1;
+}
+*/
 
 #frc {
-  flex: 1;                 /* gerektiğinde genişler */
-  min-width: 300px;        /* minimum genişlik */
-  height: 450px;           /* örnek yükseklik */
-  background: transparent; /* veya none */
+  flex: 1;
+  min-width: 300px;
+  width: 100%;
+  height: 470px;
+  display: flex;
+  justify-content: center; /* yatay ortalama */
+  align-items: center;     /* dikey ortalama */
+  flex-direction: column;  /* (opsiyonel) üst üste ortalar */
+}
+
+/* General section styling */
+.row.achievements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.row.trophies {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  animation: fadeUp 1.2s ease-in-out;
+}
+
+.container {
+  display: flex;  
+  justify-content: center;
+  align-items: flex-end;
+  gap: 40px;
+  width: 100%;
+}
+
+/* Trophy items */
+.trophy-item {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.8s forwards;
+}
+.trophy-item:nth-child(1) { animation-delay: 0.2s; }
+.trophy-item:nth-child(2) { animation-delay: 0.4s; }
+.trophy-item:nth-child(3) { animation-delay: 0.6s; }
+.trophy-item:nth-child(4) { animation-delay: 0.8s; }
+.trophy-item:nth-child(5) { animation-delay: 1s; }
+.trophy-item:nth-child(6) { animation-delay: 1.2s; }
+.trophy-item:nth-child(7) { animation-delay: 1.4s; }
+
+.trophy-item p {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #f0f0f0; 
+  text-shadow: 0px 2px 4px rgba(0,0,0,0.4);
+  transition: color 0.3s ease;
+}
+
+.trophy-item:hover p {
+  color: #ffcc00;
+}
+
+/* Trophy images */
+.trophy-item img {
+  border-radius: 12px;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.5));
+  image-rendering: auto; /* makes images smooth */
+}
+
+.trophy-item img:hover {
+  transform: scale(1.05) rotate(-1deg);
+  filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.7));
+}
+
+/* right side mirroring */
+.r {
+  transform: scaleX(-1);
+}
+.r:hover {
+  transform: scale(1.25) scaleX(-1) rotate(2deg);
+}
+
+/* Fixed center trophy */
+.center {
+  flex: 0 0 auto;
+  transform: scale(1.05);
+}
+
+/* Sizes */
+.small { width: 80px; }
+.medium { width: 110px; }
+.large { width: 142px; }
+.xlarge { width: 300px; }
+.xmedium { width: 260px; }
+
+/* Keyframes for smooth entrance */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
