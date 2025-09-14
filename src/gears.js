@@ -2,7 +2,9 @@ const wrapper = document.getElementById('gear-wrapper');
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 const canvas = renderer.domElement;
 
-renderer.setSize(wrapper.clientWidth, wrapper.clientHeight);
+canvas.id = "gearCanvas";
+
+renderer.setSize(wrapper.clientWidth * (19/20), wrapper.clientHeight * (19/20));
 renderer.outputEncoding = THREE.sRGBEncoding;
 wrapper.appendChild(renderer.domElement);
 
@@ -14,7 +16,13 @@ const camera = new THREE.PerspectiveCamera(
   0.01,
   1000
 );
-camera.position.set(1, 0, 6);
+
+
+if (window.innerWidth >= 768) {
+  camera.position.set(1, 0, 6);
+}else {
+  camera.position.set(1, 0, 8);
+}
 camera.lookAt(0, 0, 0);
 
 const rgbeLoader = new THREE.RGBELoader();
@@ -95,64 +103,61 @@ let gearDOM = {
   gear3: null
 };
 
-
 loadAllAssets(files).then((assets) => {
-    if (assets.baseColor) assets.baseColor.encoding = THREE.sRGBEncoding;
+  if (assets.baseColor) assets.baseColor.encoding = THREE.sRGBEncoding;
 
-    const scale = 0.045;
-    let gears = [];
-  
-    if (assets["large-gear"]) {
-        gears.push([assets["large-gear"], [-1.1, -0.5, 0]]);
-    }
-  
-    if (assets["small-gear"]) {
-        gears.push([assets["small-gear"].clone(), [0, 1.5, 0]]);
-        gears.push([assets["small-gear"].clone(), [1.53, 0.72, 0]]);
-    } else {
-        console.warn("small-gear cache'de yok!");
-    }
+  const scale = 0.045;
+  let gears = [];
 
-    for (let i = 0; i < gears.length; i++) {
-      const gear = gears[i][0];
-      const pos = gears[i][1];
+  if (assets["large-gear"]) {
+      gears.push([assets["large-gear"], [-1.1, -0.5, 0]]);
+  }
 
-      if (!gear) continue;
+  if (assets["small-gear"]) {
+      gears.push([assets["small-gear"].clone(), [0, 1.5, 0]]);
+      gears.push([assets["small-gear"].clone(), [1.53, 0.72, 0]]);
+  }
 
-      gear.scale.set(scale, scale, scale);
-      gear.position.set(...pos);
-      gear.rotation.set(
-        THREE.MathUtils.degToRad(90),
-        THREE.MathUtils.degToRad(185),
-        0
-      );const sharedMat = new THREE.MeshStandardMaterial({
-        map: assets.baseColor,
-        normalMap: assets.normalMap,
-        roughnessMap: assets.roughnessMap,
-        metalnessMap: assets.metalnessMap,
-        metalness: 1.0,
-        roughness: 0.7,
-        color: 0xffc800
-      });
+  for (let i = 0; i < gears.length; i++) {
+    const gear = gears[i][0];
+    const pos = gears[i][1];
 
-      [sharedMat.map, sharedMat.normalMap, sharedMat.roughnessMap, sharedMat.metalnessMap].forEach(tex => {
-        if (tex) {
-          tex.encoding = THREE.sRGBEncoding;
-          tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-          tex.anisotropy = 4;
-        }
-      });
+    if (!gear) continue;
 
-      gear.traverse((child) => {
-        if (child.isMesh) {
-          child.material = sharedMat;
-        }
-      });
+    gear.scale.set(scale, scale, scale);
+    gear.position.set(...pos);
+    gear.rotation.set(
+      THREE.MathUtils.degToRad(90),
+      THREE.MathUtils.degToRad(185),
+      0
+    );const sharedMat = new THREE.MeshStandardMaterial({
+      map: assets.baseColor,
+      normalMap: assets.normalMap,
+      roughnessMap: assets.roughnessMap,
+      metalnessMap: assets.metalnessMap,
+      metalness: 1.0,
+      roughness: 0.7,
+      color: 0xffc800
+    });
 
-      scene.add(gear);
-      gearDOM[`gear${i + 1}`] = gear;
-    }
-  });
+    [sharedMat.map, sharedMat.normalMap, sharedMat.roughnessMap, sharedMat.metalnessMap].forEach(tex => {
+      if (tex) {
+        tex.encoding = THREE.sRGBEncoding;
+        tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+        tex.anisotropy = 4;
+      }
+    });
+
+    gear.traverse((child) => {
+      if (child.isMesh) {
+        child.material = sharedMat;
+      }
+    });
+
+    scene.add(gear);
+    gearDOM[`gear${i + 1}`] = gear;
+  }
+});
 
 
 function onResize() {

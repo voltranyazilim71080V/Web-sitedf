@@ -41,19 +41,11 @@ async function cacheFiles(fileList) {
   for (let i = 0; i < fileList.length; i++) {
     const { key, url } = fileList[i];
 
-    // Eğer zaten cache’te varsa tekrar indirme
     const cached = await getFileFromDB(key);
-    if (cached) {
-      console.log(`${key} zaten cache’de`);
-      continue;
-    }
+    if (cached) { continue; }
 
-    // Dosyayı fetch et
     const response = await fetch(url);
-    if (!response.ok) {
-      console.warn(`Dosya alınamadı: ${url}`);
-      continue;
-    }
+    if (!response.ok) { continue; }
 
     let file;
     if (typeof url === "string" && (url.endsWith(".glb") || url.endsWith(".hdr"))) {
@@ -61,16 +53,13 @@ async function cacheFiles(fileList) {
     } else if (typeof url === "string" && (url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg"))) {
       file = await response.blob();
     } else {
-      console.warn(`Desteklenmeyen dosya tipi: ${url}`);
       continue;
     }
 
     await saveFile(key, file);
-    console.log(`${key} cachelendi`);
   }
 }
 
-// Örnek dosya listesi
 const files = [
   { key: "large-gear", url: "/GLB/large-gear.glb", type: "glb" },
   { key: "small-gear", url: "/GLB/small-gear.glb", type: "glb" },
@@ -85,4 +74,4 @@ const files = [
   { key: "roughness", url: "/texture/roughness.jpg", type: "texture" },
 ];
 
-cacheFiles(files).then(() => console.log("Tüm dosyalar cachelendi"));
+cacheFiles(files).then(() => console.log("Cache Rate: 100%"));

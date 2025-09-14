@@ -78,7 +78,7 @@ function setTranslate(x, withTransition = true) {
   const px = Math.round(x);
   if (withTransition) slider.style.transition = `transform ${snapDuration}ms cubic-bezier(.2,.8,.2,1)`;
   else slider.style.transition = 'none';
-  
+
   slider.style.transform = `translate3d(${px}px, 0, 0)`;
   currentTranslate = px;
 }
@@ -122,7 +122,7 @@ document.addEventListener('keydown', e => {
 function pointerDown(clientX) {
   isDragging = true;
   startX = clientX;
-  
+
   prevTranslate = currentTranslate;
   slider.style.transition = 'none';
   document.body.style.userSelect = 'none';
@@ -207,3 +207,37 @@ document.addEventListener('DOMContentLoaded', () => {
   activeIndex = clampIndex(3);
   updateSlider();
 }, { once: true });
+
+function scrollToSection(id) {
+  if (id == "sponsorship") {
+    document.getElementById(`${id}_section`).scrollIntoView({ behavior: "smooth", block: "end" });
+  }else {
+    document.getElementById(`${id}_section`).scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
+if (window.innerWidth <= 768) {
+  document.getElementById("logo-div").innerHTML = `
+    <div class="introduce-div"> 
+      <a href="#start">
+        <img class="logo" id="logo" src="/SVG/voltranLogo.svg" alt="Voltran Robotics Logo" /></a>
+      <a href="#start">
+        <h1 class="logo-title" id="logo-title">VOLTRAN ROBOTICS</h1>
+      </a>
+    </div>
+    <img src="photos/lines.png" class="icon" id="menuButton">
+  `;
+}
+
+document.getElementById("menuButton").addEventListener("click", function() {
+  document.getElementById("sidebar").classList.add("active");
+});
+
+document.getElementById("x-button").addEventListener("click", function() {
+  document.getElementById("sidebar").classList.remove("active");
+});
+
+function openSubmenu(id) {
+  document.getElementById(`${id}_sub`).classList.toggle("open");
+  document.getElementById(`${id}_icon`).classList.toggle("open");
+}
