@@ -26,9 +26,11 @@ let awards= [
   "2023 VRC TEAM CAPTAIN OF THE YEAR"
 ];
 
-canvas.addEventListener("mousedown", () => {
-  direction = (direction == 0) ? 1 : 0;
-});
+if (window.innerWidth >= 768) {
+  canvas.addEventListener("mousedown", () => {
+    direction = (direction == 0) ? 1 : 0;
+  });
+}
 
 document.querySelector(".instagram").addEventListener("contextmenu", function(e) {
   e.preventDefault();
@@ -166,11 +168,10 @@ function pointerUp() {
 
   newIndex = clampIndex(newIndex);
 
-  // 🔽 yön belirleme (mouse için)
   if (newIndex > activeIndex) {
-    directionSlider = 1; // sağa kaydırıldı
+    directionSlider = 1;
   } else if (newIndex < activeIndex) {
-    directionSlider = 0; // sola kaydırıldı
+    directionSlider = 0;
   }
 
   activeIndex = newIndex;
@@ -216,28 +217,18 @@ function scrollToSection(id) {
   }
 }
 
-if (window.innerWidth <= 768) {
-  document.getElementById("logo-div").innerHTML = `
-    <div class="introduce-div"> 
-      <a href="#start">
-        <img class="logo" id="logo" src="/SVG/voltranLogo.svg" alt="Voltran Robotics Logo" /></a>
-      <a href="#start">
-        <h1 class="logo-title" id="logo-title">VOLTRAN ROBOTICS</h1>
-      </a>
-    </div>
-    <img src="photos/lines.png" class="icon" id="menuButton">
-  `;
-}
+let dropdown = document.getElementById("dropdown");
+let dropdownMenu = document.getElementById("dropdownMenu");
+let submenu = document.getElementById("submenu");
+let timeout;
 
-document.getElementById("menuButton").addEventListener("click", function() {
-  document.getElementById("sidebar").classList.add("active");
+/* Ana menü hover */
+dropdown.addEventListener("mouseenter", () => {
+  clearTimeout(timeout);
+  dropdownMenu.classList.add("show");
 });
-
-document.getElementById("x-button").addEventListener("click", function() {
-  document.getElementById("sidebar").classList.remove("active");
+dropdown.addEventListener("mouseleave", () => {
+  timeout = setTimeout(() => {
+    dropdownMenu.classList.remove("show");
+  }, 300); // 0.3s gecikme
 });
-
-function openSubmenu(id) {
-  document.getElementById(`${id}_sub`).classList.toggle("open");
-  document.getElementById(`${id}_icon`).classList.toggle("open");
-}

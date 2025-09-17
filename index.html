@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/font/font.css" />
   <link rel="stylesheet" href="/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -12,449 +10,431 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
   <title>Voltran Robotics</title>
 </head>
-
-  <body>
-  <div class="stars-container"></div>
-  <div class="meteor-container">
-    <div class="meteor-1"></div>
-    <div class="meteor-2"></div>
-    <div class="meteor-3"></div>
-    <div class="meteor-4"></div>
-    <div class="meteor-5"></div>
-    <div class="meteor-6"></div>
-    <div class="meteor-7"></div>
-    <div class="meteor-8"></div>
-    <div class="meteor-9"></div>
-    <div class="meteor-10"></div>
-    <div class="meteor-11"></div>
-    <div class="meteor-12"></div>
-    <div class="meteor-13"></div>
-    <div class="meteor-14"></div>
-    <div class="meteor-15"></div>
-  </div>
-
-<!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <span class="close-btn" id="x-button" onclick="closeSidebar()"><svg width="18" viewBox="0 0 1001 1001" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9.50001 902.5C-21.5 960.5 37.5 1023.5 100 992L501.5 591.5L900.5 989.5C953.5 1022.5 1027.5 969.5 989.5 897.5L594 500H408.5L9.50001 902.5Z" fill="white"/>
-        <path d="M10.5164 97.9097C-20.4836 39.9097 38.5164 -23.0903 101.016 8.40973L502.516 408.91L901.516 10.9097C954.516 -22.0903 1028.52 30.9097 990.516 102.91L595.016 500.41H409.516L10.5164 97.9097Z" fill="white"/>
-        </svg>
-</span>
+  <body id="page">
+      <div class="stars-container"></div>
+      <div class="meteor-container">
+        <div class="meteor-1"></div>
+        <div class="meteor-2"></div>
+        <div class="meteor-3"></div>
+        <div class="meteor-4"></div>
+        <div class="meteor-5"></div>
+        <div class="meteor-6"></div>
+        <div class="meteor-7"></div>
+        <div class="meteor-8"></div>
+        <div class="meteor-9"></div>
+        <div class="meteor-10"></div>
+        <div class="meteor-11"></div>
+        <div class="meteor-12"></div>
+        <div class="meteor-13"></div>
+        <div class="meteor-14"></div>
+        <div class="meteor-15"></div>
       </div>
-      <ul class="sidebar-menu">
-        <li>
-          <div id="anasayfa" onclick="openSubmenu(this.id)">
-            Anasayfa
-            <svg width="15" id="anasayfa_icon" class="submenu-icon" viewBox="0 0 1000 544" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.50001 64.5C-19.5 7.50001 45 -11 65 7.50001L500 440.5V543.5C495 543.5 483 541.4 475 533C467 524.6 159.333 217.167 6.50001 64.5Z" fill="#F3F3F3"/>
-              <path d="M935 6.91424C955 -11.5858 1019.5 6.91424 993.5 63.9142C840.667 216.581 533 524.014 525 532.414C517 540.814 505 542.914 500 542.914V439.914L935 6.91424Z" fill="#F3F3F3"/>
-            </svg>
-          </div>
-          <ul id="anasayfa_sub" class="submenu">
-            <li>Who we are?</li>
-            <li>How we work?</li>
-            <li>Our team structure</li>
-            <li>Competitions</li>
-            <li>Achievements</li>
-            <li>Sponsorship</li>
-            <li>Contact Us</li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-<!--------------------->
+
+    <!-- <svg width="18" viewBox="0 0 1001 1001" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.50001 902.5C-21.5 960.5 37.5 1023.5 100 992L501.5 591.5L900.5 989.5C953.5 1022.5 1027.5 969.5 989.5 897.5L594 500H408.5L9.50001 902.5Z" fill="white"/>
+      <path d="M10.5164 97.9097C-20.4836 39.9097 38.5164 -23.0903 101.016 8.40973L502.516 408.91L901.516 10.9097C954.516 -22.0903 1028.52 30.9097 990.516 102.91L595.016 500.41H409.516L10.5164 97.9097Z" fill="white"/>
+      </svg>
+    -->
     
-  <!-- HEADER / NAV -->
-    <header class="navbar nav-wrap">
-      <div class="logo-div" id="logo-div">
-        <img src="photos/lines.png" class="icon" id="menuButton">
-        <a href="#start">
-          <img class="logo" id="logo" src="/SVG/voltranLogo.svg" alt="Voltran Robotics Logo" /></a>
-        <a href="#start">
-          <h1 class="logo-title" id="logo-title">VOLTRAN ROBOTICS</h1>
-        </a>
-      </div>
-      <nav class="titles">
-        <ul class="menu">
-          <!--
-          <li><a class="title" id="whoweare" onclick="scrollToSection(this.id)">Who We Are</a></li>
-          <li><a class="title" id="howwework" onclick="scrollToSection(this.id)">How We Work</a></li>
-          <li><a class="title" id="teamstructure" onclick="scrollToSection(this.id)">Team Structure</a></li>
-          -->
-          <li><a class="title" id="competitions" onclick="scrollToSection(this.id)">Competition</a></li>
-          <li><a class="title" id="achievements" onclick="scrollToSection(this.id)">Achievements</a></li>
-          <li><a class="title" id="sponsorship" onclick="scrollToSection(this.id)">Sponsorship</a></li>
-          <li><button class="contact-button" id="contact" onclick="scrollToSection(this.id)">Contact us</button></li>
-        </ul>
-      </nav>
-    </header>
-
-  <!-- MAIN CONTENT -->
-  <main class="screen">
-    <!-- HERO SECTION -->
-    <section class="first-row padding" id="start">
-      <div class="main-titles">
-        <h1 class="large-title">PERTEVNIYAL<br />ROBOTICS</h1>
-        <h2 class="small-title">
-          We are competing in the high school category <br />of the Vex
-          competition.
-        </h2>
-      </div>
-      <div class="gears-div">
-        <figure class="gear-canvas-wrapper" id="gear-wrapper"></figure>
-      </div>
-    </section>
-
-    <!-- ABOUT US -->
-    <section class="row about padding">
-      <aside>
-        <div class="insta-post">
-          <a href="https://www.instagram.com/voltranrobotics/" target="_blank" draggable="false">
-            <img class="instagram" id="photo1" src="/SVG/insta.svg" alt="Instagram Icon" draggable="false" />
-          </a>
-          <a href="https://www.instagram.com/voltranrobotics/" target="_blank" draggable="false">
-            <img class="instagram" id="photo2" src="/SVG/insta.svg" alt="Instagram Icon" draggable="false" />
-          </a>
-        </div>
-      </aside>
-      <article id="whoweare_section" class="text-div">
-        <h1 class="large-title">WHO WE ARE?</h1>
-        <p class="text" id="text1">
-          <span class="satir" id="satir1_text1">VolTRan Robotics is the official high school robotics team
-            of</span>
-          <span class="satir" id="satir2_text1">Pertevniyal High School, based in Istanbul, Turkey. We were</span>
-          <span class="satir" id="satir3_text1">established in 2017 as part of the globally renowned FRC
-            (FIRST</span>
-          <span class="satir" id="satir4_text1">Robotics Competition), and have been continuing our journey
-            since</span>
-          <span class="satir" id="satir5_text1">2021 in the VEX Robotics Competition. Our team consists of
-            highly</span>
-          <span class="satir" id="satir6_text1">motivated students who come together to explore the
-            intersection</span>
-          <span class="satir" id="satir7_text1">of science, technology, engineering, and creativity. As of
-            2023,</span>
-          <span class="satir" id="satir8_text1">VolTRan is composed of 20 members, divided into Mechanical,</span>
-          <span class="satir" id="satir9_text1">Software, PR, and Management sub-teams. Our mission goes</span>
-          <span class="satir" id="satir10_text1">beyond robotics. We aim to cultivate leadership, collaboration,
-            and</span>
-          <span class="satir" id="satir11_text1">innovation through hands-on experience and global
-            competition.</span>
-          <span class="satir" id="satir12_text1">Every robot we build, every code we write, and every connection
-            we</span>
-          <span class="satir" id="satir13_text1">make is driven by a desire to learn and lead.</span>
-        </p>
-      </article>
-    </section>
-
-    <!-- HOW WE WORK -->
-    <section class="row workflow padding">
-      <article id="workflow-text-div">
-        <div class="step">
-          <h1 class="work-title">BRAINSTORMING</h1>
-          <span class="work-text">Team-wide idea generation sessions help us shape innovative, functional robot concepts.</span>
-        </div>
-        <div class="step">
-          <h1 class="work-title">DESIGN</h1>
-          <span class="work-text">From sketches to CAD models, the design stage makes ideas tangible.</span>
-        </div>
-        <div class="step">
-          <h1 class="work-title">PROTOTYPING</h1>
-          <span class="work-text">We test and refine our concepts with physical prototypes.</span>
-        </div>
-        <div class="step">
-          <h1 class="work-title">TESTING</h1>
-          <span class="work-text">Every subsystem is rigorously tested for performance, reliability, and efficiency.</span>
-        </div>
-        <div class="step">
-          <h1 class="work-title">IMPROVEMENTS</h1>
-          <span class="work-text">Based on real-time data and feedback, we iterate and refine until our system performs flawlessly.</span>
-        </div>
-      </article>
-      <img src="/SVG/rocket.svg">
-    </section>
-
-    <div id="teamstructure_section">
-      <section class="row workflow team padding">
-        <article class="text-div">
-          <h1 class="large-title" id="structure">OUR TEAM STRUCTURE</h1>
-        </article>
-      </section>
-  
-      <section class="row workflow structure padding">
-        <div class="cards-wrapper">
-          <div class="card" id="mechanic">
-            <div class="card-inner">
-              <div class="card-front" id="mechanic_front">
-                <img class="lion" src="/photos/photo2.png" />
-                <h3>Mechanical Team</h3>
-                <p>
-                  12 members designing and building the robot using Fusion 360 &amp;
-                  SolidWorks.
-                </p>
-              </div>
-              <div class="card-back" id="mechanic_back">
-                <span>
-                  Rüzgar ÖZDEMİR<br>
-                  Nur Efşan ŞERİN<br>
-                  Çiğdem SELALMAZ<br>
-                  Berra ABBASOĞLU<br>
-                  İlker Cem DEMİRCİ<br>
-                  Yiğit AYDIN<br>
-                  Ahmet Kaan KARAASLAN<br>
-                  Kürşat KILINÇARSLAN<br>
-                  Ulaş Doğa GÖÇENER<br>
-                </span>
+        <header class="navbar nav-wrap">
+          <div class="logo-div">
+            <div class="dropdown" id="dropdown">
+              <img src="photos/lines.png" class="icon" alt="menu">
+              <div class="dropdown-menu" id="dropdownMenu">
+                <div class="has-submenu" id="mainItem">
+                  <a href="#">Main Page</a>
+                  <div class="submenu" id="submenu">
+                    <a href="#">Who We Are?</a>
+                    <a href="#">How We Work?</a>
+                    <a href="#">Our Team Structure</a>
+                    <a href="#">Competitions</a>
+                    <a href="#">Achievements</a>
+                    <a href="#">Sponsorship</a>
+                  </div>
+                </div>
+                <a href="#">Our Projects</a>
+                <a href="#">Awareness Circle</a>
               </div>
             </div>
+
+
+            <a href="#start">
+              <img class="logo" id="logo" src="/SVG/voltranLogo.svg" alt="Voltran Robotics Logo" /></a>
+            <a href="#start">
+              <h1 class="logo-title" id="logo-title">VOLTRAN ROBOTICS</h1>
+            </a>
           </div>
-          <div class="card" id="software">
-            <div class="card-inner">
-              <div class="card-front" id="software_front">
-                <img class="lion" src="/photos/photo3.png" />
-                <h3>Software Team</h3>
-                <p>Develops autonomous and driver-controlled systems in C++.</p>
+          <nav class="titles">
+            <ul class="menu">
+              <li><a class="title" id="competitions" onclick="scrollToSection(this.id)">Competition</a></li>
+              <li><a class="title" id="achievements" onclick="scrollToSection(this.id)">Achievements</a></li>
+              <li><a class="title" id="sponsorship" onclick="scrollToSection(this.id)">Sponsorship</a></li>
+              <li><button class="contact-button" id="contact" onclick="scrollToSection(this.id)">Contact us</button></li>
+            </ul>
+          </nav>
+        </header>
+    
+      <main class="screen">
+        <section class="first-row padding" id="start">
+          <div class="main-titles">
+            <h1 class="large-title">PERTEVNIYAL<br />ROBOTICS</h1>
+            <h2 class="small-title">
+              We are competing in the high school category <br />of the Vex
+              competition.
+            </h2>
+          </div>
+          <div class="gears-div">
+            <figure class="gear-canvas-wrapper" id="gear-wrapper"></figure>
+          </div>
+        </section>
+    
+        <!-- ABOUT US -->
+        <section class="row about padding">
+          <aside>
+            <div class="insta-post">
+              <a href="https://www.instagram.com/voltranrobotics/" target="_blank" draggable="false">
+                <img class="instagram" id="photo1" src="/SVG/insta.svg" alt="Instagram Icon" draggable="false" />
+              </a>
+              <a href="https://www.instagram.com/voltranrobotics/" target="_blank" draggable="false">
+                <img class="instagram" id="photo2" src="/SVG/insta.svg" alt="Instagram Icon" draggable="false" />
+              </a>
+            </div>
+          </aside>
+          <article id="whoweare_section" class="text-div">
+            <h1 class="large-title" id="who-title">WHO WE ARE?</h1>
+            <p class="text" id="text1">
+              <span class="satir" id="satir1_text1">VolTRan Robotics is the official high school robotics team of Pertevniyal High School, based in Istanbul, Turkey. We were established in 2017 as part of the globally renowned FRC (FIRST Robotics Competition), and have been continuing our journey since 2021 in the VEX Robotics Competition. Our team consists of highly motivated students who come together to explore the intersection of science, technology, engineering, and creativity. As of 2023, VolTRan is composed of 20 members, divided into Mechanical, Software, PR, and Management sub-teams. Our mission goes beyond robotics. We aim to cultivate leadership, collaboration, and innovation through hands-on experience and global competition. Every robot we build, every code we write, and every connection we make is driven by a desire to learn and lead.</span>
+            </p>
+          </article>
+        </section>
+    
+        <div id="teamstructure_section">
+          <section class="row workflow team padding">
+            <article class="text-div">
+              <h1 class="large-title" id="structure">OUR TEAM STRUCTURE</h1>
+            </article>
+          </section>
+      
+          <section class="row workflow structure padding">
+            <div class="cards-wrapper">
+              <div class="card" id="mechanic">
+                <div class="card-inner">
+                  <div class="card-front" id="mechanic_front">
+                    <img class="lion" src="/photos/photo2.png" />
+                    <h3>Mechanical Team</h3>
+                    <p>
+                      12 members designing and building the robot using Fusion 360 &amp;
+                      SolidWorks.
+                    </p>
+                  </div>
+                  <div class="card-back" id="mechanic_back">
+                    <span>
+                      Rüzgar ÖZDEMİR<br>
+                      Nur Efşan ŞERİN<br>
+                      Çiğdem SELALMAZ<br>
+                      Berra ABBASOĞLU<br>
+                      İlker Cem DEMİRCİ<br>
+                      Yiğit AYDIN<br>
+                      Ahmet Kaan KARAASLAN<br>
+                      Kürşat KILINÇARSLAN<br>
+                      Ulaş Doğa GÖÇENER<br>
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div class="card-back" id="software_back">
-                <span>
-                  Ahmet Rıfat ÖZTÜRK<br>
-                  Kürşat KILINÇARSLAN<br>
-                  Ulaş Doğa GÖÇENER<br>
-                </span>
+              <div class="card" id="software">
+                <div class="card-inner">
+                  <div class="card-front" id="software_front">
+                    <img class="lion" src="/photos/photo3.png" />
+                    <h3>Software Team</h3>
+                    <p>Develops autonomous and driver-controlled systems in C++.</p>
+                  </div>
+                  <div class="card-back" id="software_back">
+                    <span>
+                      Ahmet Rıfat ÖZTÜRK<br>
+                      Kürşat KILINÇARSLAN<br>
+                      Ulaş Doğa GÖÇENER<br>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="card" id="pr">
+                <div class="card-inner">
+                  <div class="card-front" id="pr_front">
+                    <img class="lion" src="/photos/photo4.png" />
+                    <h3>PR Team</h3>
+                    <p>
+                      Manages social media, outreach, and sponsorships to boost team
+                      visibility.
+                    </p>
+                  </div>
+                  <div class="card-back" id="pr_back">
+                    <span>
+                      Nur Efşan ŞERİN<br>
+                      Zeynep Rana ÖZDEMİR<br>
+                      Asya Hilal AKAY<br>
+                      Ayşe Bahar ÖZTÜRK<br>
+                      Azra ARAS<br>
+                      Ege ALPASLAN<br>
+                      Miray KIZILENİŞ<br>
+                      Habibe Nisa ÇİMEN<br>
+                      Helin ALAHMAD<br>
+                      Tuba Meryem AYAR<br>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="card" id="drive">
+                <div class="card-inner">
+                  <div class="card-front" id="drive_front">
+                    <img class="lion" src="/photos/photo5.png" />
+                    <h3>Drive Team</h3>
+                    <p>
+                      Our drive team have full control of the robot throughout the race.
+                    </p>
+                  </div>
+                  <div class="card-back" id="drive_back">
+                    <span>
+                      İlker Cem DEMİRCİ<br>
+                      Ulaş Doğa GÖÇENER
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
+          </section>
+        </div>
+        <section class="row competition padding">
+          <article>
+            <h1 class="large-title" id="compet-title">COMPETITIONS</h1>
+          </article>
+        </section>
+    
+        <!--COMPETITIONS-->
+        <section class="row frc padding" id="competitions">
+          <article id="competitions_section" class="text-div">
+            <h1 class="large-title" id="mission">FIRST ROBOTICS</h1>
+            <p class="text" id="text3">
+              <span class="satir" id="satir1_text3">FIRST Robotics Competition (FRC): A global program that combines the excitement of sport with the rigors of science and technology. FRC pushes us to solve real-world engineering challenges while promoting gracious professionalism. Each season, teams of students and mentors design, build, and program industrial-sized robots to compete in a themed game, requiring not only technical expertise but also creativity, teamwork, and strategic thinking. Beyond the competition itself, FRC fosters innovation, leadership, and collaboration, preparing students for future careers in STEM while building a strong sense of community and global connection.</span>
+            </p>
+          </article>
+          <div id="frc" style='background-image: url("/photos/photo18.png"); background-size: cover; background-position: center;'>
+    
           </div>
-          <div class="card" id="pr">
-            <div class="card-inner">
-              <div class="card-front" id="pr_front">
-                <img class="lion" src="/photos/photo4.png" />
-                <h3>PR Team</h3>
-                <p>
-                  Manages social media, outreach, and sponsorships to boost team
-                  visibility.
-                </p>
-              </div>
-              <div class="card-back" id="pr_back">
-                <span>
-                  Nur Efşan ŞERİN<br>
-                  Zeynep Rana ÖZDEMİR<br>
-                  Asya Hilal AKAY<br>
-                  Ayşe Bahar ÖZTÜRK<br>
-                  Azra ARAS<br>
-                  Ege ALPASLAN<br>
-                  Miray KIZILENİŞ<br>
-                  Habibe Nisa ÇİMEN<br>
-                  Helin ALAHMAD<br>
-                  Tuba Meryem AYAR<br>
-                </span>
-              </div>
+        </section>
+    
+        <section class="row vrc padding">
+          <div id="vrc">
+            
+          </div>
+          <article class="text-div">
+            <h1 class="large-title" id="mission">VEX ROBOTICS</h1>
+            <p class="text" id="text4">
+              <span class="satir" id="satir1_text4">VEX Robotics Competition (VRC): The largest and fastest-growing robotics competition in the world. VEX allows us to develop competitive robots within strict design constraints, encouraging creativity and resilience. Each season introduces a brand-new challenge, pushing teams to strategize, prototype, and refine their designs in order to outperform their opponents on the field. The competition not only strengthens engineering and programming skills but also teaches critical lessons in problem-solving, communication, and adaptability. Through collaboration with teammates and interaction with other teams worldwide, VRC builds a strong culture of innovation and teamwork, inspiring students to apply their knowledge beyond the competition arena.</span>
+            </p>
+          </article>
+          <div id="vrc2">
+
+          </div>
+        </section>
+    
+        <section class="row achievements padding">
+          <article>
+            <h1 class="large-title">ACHIEVEMENTS</h1>
+              <p class="text" id="text">
+                <span class="satir" id="satir1_text5"></span>
+              </p>
+            </h1>
+          </article>
+        </section>
+    
+        <section  id="achievements_section" class="row trophies">
+          <div class="slider-wrapper">
+            <div class="slider">
+              <div class="trophy-item"><img src="/photos/photo13.png" class="medium a" draggable="false"></div>
+              <div class="trophy-item"><img src="/photos/photo13.png" class="medium b" draggable="false"></div>
+              <div class="trophy-item"><img src="/photos/photo13.png" class="medium c" draggable="false"></div>
+              <div class="trophy-item"><img src="/photos/photo11.png" class="large d"  draggable="false"></div>
+              <div class="trophy-item"><img src="/photos/photo12.png" class="medium e" draggable="false"></div>
+              <div class="trophy-item"><img src="/photos/photo13.png" class="medium f" draggable="false"></div>
+              <div class="trophy-item"><img src="/photos/photo13.png" class="medium g" draggable="false"></div>
             </div>
           </div>
-          <div class="card" id="drive">
-            <div class="card-inner">
-              <div class="card-front" id="drive_front">
-                <img class="lion" src="/photos/photo5.png" />
-                <h3>Drive Team</h3>
-                <p>
-                  Our drive team have full control of the robot throughout the race.
-                </p>
-              </div>
-              <div class="card-back" id="drive_back">
-                <span>
-                  İlker Cem DEMİRCİ<br>
-                  Ulaş Doğa GÖÇENER
-                </span>
-              </div>
+        </section>
+        <section class="row trophy-info">
+          <span id="award-text">
+            FRC TURKEY CHAMPIONSHIP
+          </span>
+        </section>
+
+        <section class="row workflow team padding">
+          <article class="text-div">
+            <h1 class="large-title" id="structure">SPONSORSHIP</h1>
+          </article>
+        </section>
+        <section id="sponsorship_section" class="row packages padding">
+          <div class="package mars">
+            <div class="planetWrapper">
+              <img src="/photos/photo16.png" class="marsIcon" draggable="false">
             </div>
+            <h1 class="package-title">MARS</h1>
+            <span class="price">2.000 - 25.000</span>
+            <span class="info-span">Visibility on all media platforms</span>
+            <span class="info-span">A thank-you on all media platforms</span>
           </div>
-        </div>
-      </section>
-    </div>
-    <section class="row competition padding">
-      <article>
-        <h1 class="large-title">COMPETITIONS</h1>
-      </article>
-    </section>
-
-    <!--COMPETITIONS-->
-    <section class="row frc padding" id="competitions">
-      <article id="competitions_section" class="text-div">
-        <h1 class="large-title" id="mission">FIRST ROBOTICS</h1>
-        <p class="text" id="text3">
-          <span class="satir" id="satir1_text3">FIRST Robotics Competition (FRC): A global program that combines</span>
-          <span class="satir" id="satir2_text3">the excitement of sport with the rigors of science and technology.</span>
-          <span class="satir" id="satir3_text3">FRC pushes us to solve real-world engineering challenges while</span>
-          <span class="satir" id="satir4_text3">promoting gracious professionalism. Each season, teams of students</span>
-          <span class="satir" id="satir5_text3">and mentors design, build, and program industrial-sized robots to</span>
-          <span class="satir" id="satir6_text3">compete in a themed game, requiring not only technical expertise</span>
-          <span class="satir" id="satir7_text3">but also creativity, teamwork, and strategic thinking. Beyond the</span>
-          <span class="satir" id="satir8_text3">competition itself, FRC fosters innovation, leadership, and</span>
-          <span class="satir" id="satir9_text3">collaboration, preparing students for future careers in STEM while</span>
-          <span class="satir" id="satir10_text3">building a strong sense of community and global connection.</span>
-        </p>
-      </article>
-      <div id="frc" style='background-image: url("/photos/photo18.png"); background-size: cover; background-position: center;'>
-
-      </div>
-    </section>
-
-    <section class="row vrc padding">
-      <div id="vrc">
-        
-      </div>
-      <article class="text-div">
-        <h1 class="large-title" id="mission">VEX ROBOTICS</h1>
-        <p class="text" id="text4">
-          <span class="satir" id="satir1_text4">VEX Robotics Competition (VRC): The largest and fastest-growing</span>
-          <span class="satir" id="satir2_text4">robotics competition in the world. VEX allows us to develop</span>
-          <span class="satir" id="satir3_text4">competitive robots within strict design constraints, encouraging</span>
-          <span class="satir" id="satir4_text4">creativity and resilience. Each season introduces a brand-new</span>
-          <span class="satir" id="satir5_text4">challenge, pushing teams to strategize, prototype, and refine their</span>
-          <span class="satir" id="satir6_text4">designs in order to outperform their opponents on the field. The</span>
-          <span class="satir" id="satir7_text4">competition not only strengthens engineering and programming</span>
-          <span class="satir" id="satir8_text4">skills but also teaches critical lessons in problem-solving,</span>
-          <span class="satir" id="satir9_text4">communication, and adaptability. Through collaboration with</span>
-          <span class="satir" id="satir10_text4">teammates and interaction with other teams worldwide, VRC builds</span>
-          <span class="satir" id="satir11_text4">a strong culture of innovation and teamwork, inspiring students to</span>
-          <span class="satir" id="satir12_text4">apply their knowledge beyond the competition arena.</span>
-        </p>
-      </article>
-    </section>
-
-    <section class="row achievements padding">
-      <article>
-        <h1 class="large-title">ACHIEVEMENTS</h1>
-          <p class="text" id="text">
-            <span class="satir" id="satir1_text5"></span>
-          </p>
-        </h1>
-      </article>
-    </section>
-
-    <section  id="achievements_section" class="row trophies">
-      <div class="slider-wrapper">
-        <div class="slider">
-          <div class="trophy-item"><img src="/photos/photo13.png" class="medium a" draggable="false"></div>
-          <div class="trophy-item"><img src="/photos/photo13.png" class="medium b" draggable="false"></div>
-          <div class="trophy-item"><img src="/photos/photo13.png" class="medium c" draggable="false"></div>
-          <div class="trophy-item"><img src="/photos/photo11.png" class="large d"  draggable="false"></div>
-          <div class="trophy-item"><img src="/photos/photo12.png" class="medium e" draggable="false"></div>
-          <div class="trophy-item"><img src="/photos/photo13.png" class="medium f" draggable="false"></div>
-          <div class="trophy-item"><img src="/photos/vexred.png" class="medium g" draggable="false"></div>
-        </div>
-      </div>
-    </section>
-    <section class="row trophy-info">
-      <span id="award-text">
-        FRC TURKEY CHAMPIONSHIP
-      </span>
-    </section>
-
-    <section id="sponsorship_section" class="row packages padding">
-      <div class="package mars">
-        <div class="planetWrapper">
-          <img src="/photos/photo16.png" class="marsIcon" draggable="false">
-        </div>
-        <h1 class="package-title">MARS</h1>
-        <span class="price">2.000 - 25.000</span>
-        <span class="info-span">Visibility on all media platforms</span>
-        <span class="info-span">A thank-you on all media platforms</span>
-      </div>
-
-      <div class="package venus">
-        <div class="planetWrapper">
-          <img src="/photos/photo14.png" class="venusIcon" draggable="false">
-        </div>
-        <h1 class="package-title">VENUS</h1>
-        <span class="price">25.000 - 50.000</span>
-        <div class="info-div">
-          <span class="info-span">Company logo printed on clothing</span>
-          <span class="info-span">Visibility at the competition venue</span>
-        </div>
-        <span class="ekstra">Mars Package</span>
-      </div> 
-
-      <div class="package uranus">
-        <div class="planetWrapper">
-          <img src="/photos/photo15.png" class="uranusIcon" draggable="false">
-        </div>
-        <h1 class="package-title">URANUS</h1>
-        <span class="price">50.000 - 99.999</span>
-        <div class="info-div">
-          <span class="info-span">Weekly social media advertising support</span>
-        </div>
-        <span class="ekstra">Venus Package</span>
-      </div>
-
-      <div class="package saturn">
-        <div class="planetWrapper">
-          <img src="/photos/photo17.png" class="saturnIcon" id="saturn" draggable="false">
-        </div>
-        <h1 class="package-title">SATURN</h1>
-        <span class="price">100.000+</span>
-        <div class="info-div">
-          <span class="info-span">Special thank-you in promotional videos</span>
-          <span class="info-span">Visibility with the company name at events and presentations</span>
-        </div>
-        <span class="ekstra">Uranus Package</span>
-      </div>
-    </section>
-
-
-    <section class="contact-area">
-    <div class="contact-panel">
-      <h1 class="large-title">CONTACT US</h1>
-    </div>    
-
-      <div class="content-area">
-      <div class="posta">
-        <h1 class="large-title" id="title">Get In Touch With Us!</h1>
-        <form id="contactForm" action="https://formsubmit.co/voltranyazilim71080v@gmail.com" method="POST">
-          <input type="hidden" name="_next" value="https://2ed94755-b4b9-46f0-abf5-1e12e52b8cdf-00-3ewq17nwf2sq8.sisko.replit.dev/">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_subject" value="Yeni İletişim Formu">
-
-          <div class="input-box">
-            <input id="name" type="text" name="name" placeholder="Name" required>
+    
+          <div class="package venus">
+            <div class="planetWrapper">
+              <img src="/photos/photo14.png" class="venusIcon" draggable="false">
+            </div>
+            <h1 class="package-title">VENUS</h1>
+            <span class="price">25.000 - 50.000</span>
+            <div class="info-div">
+              <span class="info-span">Company logo printed on clothing</span>
+              <span class="info-span">Visibility at the competition venue</span>
+            </div>
+            <span class="ekstra">Mars Package</span>
+          </div> 
+    
+          <div class="package uranus">
+            <div class="planetWrapper">
+              <img src="/photos/photo15.png" class="uranusIcon" draggable="false">
+            </div>
+            <h1 class="package-title">URANUS</h1>
+            <span class="price">50.000 - 99.999</span>
+            <div class="info-div">
+              <span class="info-span">Weekly social media advertising support</span>
+            </div>
+            <span class="ekstra">Venus Package</span>
           </div>
-          <div class="input-box">
-            <input id="surname" type="text" name="surname" placeholder="Surname" required>
+    
+          <div class="package saturn">
+            <div class="planetWrapper">
+              <img src="/photos/photo17.png" class="saturnIcon" id="saturn" draggable="false">
+            </div>
+            <h1 class="package-title">SATURN</h1>
+            <span class="price">100.000+</span>
+            <div class="info-div">
+              <span class="info-span">Special thank-you in promotional videos</span>
+              <span class="info-span">Visibility with the company name at events and presentations</span>
+            </div>
+            <span class="ekstra">Uranus Package</span>
           </div>
-          <div class="input-box">
-            <input id="email" type="email" name="email" placeholder="E-mail" required>
+        </section>
+    
+    
+        <section class="contact-area">
+        <div class="contact-panel">
+          <h1 class="large-title">CONTACT US</h1>
+        </div>    
+    
+          <div class="content-area" id="contact_section">
+          <div class="posta">
+            <h1 class="large-title" id="title">Get In Touch With Us!</h1>
+            <form id="contactForm" action="https://formsubmit.co/voltranyazilim71080v@gmail.com" method="POST" onsubmit="this.reset();">
+              <input type="hidden" name="_next" value="https://2ed94755-b4b9-46f0-abf5-1e12e52b8cdf-00-3ewq17nwf2sq8.sisko.replit.dev/">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_subject" value="Yeni İletişim Formu">
+    
+              <div class="input-box">
+                <input id="name" type="text" name="name" placeholder="Name" required>
+              </div>
+              <div class="input-box">
+                <input id="surname" type="text" name="surname" placeholder="Surname" required>
+              </div>
+              <div class="input-box">
+                <input id="email" type="email" name="email" placeholder="E-mail" required>
+              </div>
+              <div class="input-box">
+                <textarea id="message" name="message" placeholder="Your message..." required></textarea>
+              </div>
+    
+            <button type="submit" id="submit">
+              <img src="SVG/sendicon.svg" alt="Send" class="btn-icon">
+              Submit
+            </button>
+            </form>
+    
+            <script>
+              const form = document.getElementById('contactForm');
+    
+              form.addEventListener('submit', function(event) {
+                alert('Mesajınız başarıyla gönderildi!');
+                // Bu alertten sonra form normal şekilde gönderilecek
+              });
+            </script>
+    
           </div>
-          <div class="input-box">
-            <textarea id="message" name="message" placeholder="Your message..." required></textarea>
+    
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.666178410458!2d28.953005899999997!3d41.010679200000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab987fea2c943%3A0x79bd193072ae9667!2sPertevniyal%20Lisesi!5e0!3m2!1str!2str!4v1756844642213!5m2!1str!2str" style="border:0;" allowfullscreen="" loading="fast" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
+            </div>
+        </section>
+        <footer class="info-panel">
+          <div class="info-part">
+            <p id="teamName">-VOLTRAN ROBOTICS-</p>
+            <p>voltranrobotics@gmail.com</p>
           </div>
 
-          <button type="submit" id="submit">Submit</button>
-        </form>
+          <!-- Sosyal medya ikonları -->
+          <div class="social-icons">
+            <a href="#" class="share twitter">
+              <svg role="presentation" class="svg--icon">
+                <use xlink:href="#svg--twitter" />
+              </svg>
+              <span class="clip">Twitter</span>
+            </a>
 
-        <script>
-          const form = document.getElementById('contactForm');
+            <a href="#" class="share google">
+              <svg role="presentation" class="svg--icon">
+                <use xlink:href="#svg--google" />
+              </svg>
+              <span class="clip">Google</span>
+            </a>
 
-          form.addEventListener('submit', function(event) {
-            alert('Mesajınız başarıyla gönderildi!');
-            // Bu alertten sonra form normal şekilde gönderilecek
-          });
-        </script>
+            <a href="#" class="share facebook">
+              <svg role="presentation" class="svg--icon">
+                <use xlink:href="#svg--facebook" />
+              </svg>
+              <span class="clip">Facebook</span>
+            </a>
 
-      </div>
+            <a href="#" class="share github">
+              <svg role="presentation" class="svg--icon">
+                <use xlink:href="#svg--github" />
+              </svg>
+              <span class="clip">Github</span>
+            </a>
 
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.666178410458!2d28.953005899999997!3d41.010679200000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab987fea2c943%3A0x79bd193072ae9667!2sPertevniyal%20Lisesi!5e0!3m2!1str!2str!4v1756844642213!5m2!1str!2str" style="border:0;" allowfullscreen="" loading="fast" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
-        </div>
-    </section>
-    <footer class="info-panel">
-      <p id="teamName">-VOLTRAN ROBOTICS-</p>
-      <p>0-505-xxxx-xx</p>
-      <p>info@gmail.com</p>
-    </footer>
-  </main>
+            <a href="#" class="share pinterest">
+              <svg role="presentation" class="svg--icon">
+                <use xlink:href="#svg--pinterest" />
+              </svg>
+              <span class="clip">Pinterest</span>
+            </a>
+
+            <a href="#" class="share youtube">
+              <svg role="presentation" class="svg--icon">
+                <use xlink:href="#svg--youtube" />
+              </svg>
+              <span class="clip">YouTube</span>
+            </a>
+          </div>
+
+          <p>Atatürk Bulvarı No1 34080 Fatih/İstanbul</p>
+        </footer>
+        <svg class="svg--source" width="0" height="0" aria-hidden="true">
+          <symbol id="svg--linkedin" viewBox="0 0 640 640">
+            <path d="M196.3 512L103.4 512L103.4 212.9L196.3 212.9L196.3 512zM149.8 172.1C120.1 172.1 96 147.5 96 117.8C96 103.5 101.7 89.9 111.8 79.8C121.9 69.7 135.6 64 149.8 64C164 64 177.7 69.7 187.8 79.8C197.9 89.9 203.6 103.6 203.6 117.8C203.6 147.5 179.5 172.1 149.8 172.1zM543.9 512L451.2 512L451.2 366.4C451.2 331.7 450.5 287.2 402.9 287.2C354.6 287.2 347.2 324.9 347.2 363.9L347.2 512L254.4 512L254.4 212.9L343.5 212.9L343.5 253.7L344.8 253.7C357.2 230.2 387.5 205.4 432.7 205.4C526.7 205.4 544 267.3 544 347.7L544 512L543.9 512z"/>
+          </symbol>
+
+        </svg>
+      </main>
 
 
   <!-- JS -->
   <script src="src/indexedDB.js"></script>
   <script src="src/gears.js"></script>
+  <script src="src/gearsMobile.js"></script>
   <script src="src/scroll.js"></script>
   <script src="src/clickActions.js"></script>
   <script src="src/competition.js"></script>

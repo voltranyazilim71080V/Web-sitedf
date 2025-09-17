@@ -315,7 +315,7 @@ main.screen::-webkit-scrollbar {
   display: flex;
   justify-content: center;
   margin-top: 10vh;
-  margin-left: 5vw;
+  margin-left: 10vw;
 }
 
 /* TEXT CONTENT */
@@ -440,10 +440,6 @@ section.row {
   outline: none;
 }
 
-footer {
-  height: 80px;
-  outline: none;
-}
 
 .svgObject svg {
   width: 100%;
@@ -858,6 +854,7 @@ footer {
 }
 
 
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   header.navbar {
@@ -893,24 +890,37 @@ footer {
 
   .titles {
     display: none;
-    /* normal menüyü gizle */
   }
 
   #menuButton {
     display: block;
-    /* hamburger görünür */
   }
+  .info-panel {
+    flex-direction: row;
+    height: auto;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .social-icon {
+    justify-content: center;
+  }
+}
+
+#teamstructure_section {
+  margin-top: 35vh;
 }
 
 .row.workflow.team {
   justify-content: center;
+  margin-top: 50vh;
 }
 
 .row.workflow.structure {
   display: flex;
   justify-content: center;
   margin: 0;
-  margin-top: 50px;
+  margin-top: 10vh;
 }
 
 .cards-wrapper {
@@ -1061,18 +1071,6 @@ section.row.competition {
   border-radius: 15px;
 }
 
-/*
-#vrc::before {
-  content: "";
-  position: absolute;
-  top: -20px; bottom: -20px;
-  left: -20px; right: -20px;
-  background: inherit;
-  filter: blur(0px);
-  z-index: 1;
-}
-*/
-
 #frc {
   flex: 1;
   min-width: 300px;
@@ -1160,7 +1158,6 @@ section.row.competition {
   text-align: center;
 }
 
-/* WebKit için seçim, uzun-press ve görsel sürüklemeyi kapatır */
 .row.achievements,
 #achievements_section,
 .row.trophies,
@@ -1171,14 +1168,10 @@ section.row.competition {
 #award-text,
 .trophy-item img {
   -webkit-user-select: none;
-  /* metin seçimini kapatır (WebKit) */
   -webkit-touch-callout: none;
-  /* iOS uzun basınca çıkan menüyü kapatır */
   -webkit-tap-highlight-color: transparent;
-  /* mobilde mavi/tonlama vurgu kaldırır */
 }
 
-/* Resimlerin sürüklenmesini engelle (WebKit) */
 .trophy-item img {
   -webkit-user-drag: none;
 }
@@ -1207,8 +1200,6 @@ section.row.competition {
 .g {
   transform: rotateZ(-5deg);
 }
-
-/* SPONSORSHIP */
 
 .row.packages {
   display: flex;
@@ -1273,7 +1264,6 @@ section.row.competition {
 .package.saturn {
   height: 560px;
   width: 240px;
-  /* orijinal boyutu korundu */
   padding-top: 20px;
   background-image: linear-gradient(to bottom, #757357, #D8BB76);
   transition: box-shadow 0.3s ease;
@@ -1283,44 +1273,34 @@ section.row.competition {
   box-shadow: 0 0 20px rgba(170, 154, 104, 0.7);
 }
 
-/* Gezegen wrapper: salınma animasyonu burada */
 .planetWrapper {
   display: inline-block;
   animation: float 6s ease-in-out infinite;
   will-change: transform;
 }
 
-/* Gezegen img: boyut ve hover için transform */
 .planetWrapper img {
   width: 150px;
-  /* Mars, Venus, Uranus için */
   height: auto;
-  /* Oranı korumak için auto */
   border-radius: 50%;
   display: block;
   transition: transform 0.4s ease;
-  /* hover akıcı geçiş */
 }
 
-/* Saturn img için ayrı boyut */
-.saturnIcon {
-  width: 180px;
-  /* ihtiyaç halinde artırılabilir */
+.planetWrapper img.saturnIcon {
+  width: 300px;
   height: auto;
   border-radius: 50%;
 }
 
-/* Hover olunca img yukarı kayar */
 .planetWrapper img:hover {
   transform: translateY(-20px);
 }
 
-/* Hover sırasında wrapper animasyonu durur */
 .package:hover .planetWrapper {
   animation-play-state: paused;
 }
 
-/* Float animasyonu wrapper üzerinde */
 @keyframes float {
   0% {
     transform: translateY(0px);
@@ -1426,7 +1406,6 @@ section.row.competition {
   padding-right: 400px;
 }
 
-/* SIDEBAR */
 .icon {
   position: relative;
   width: 1.95vw;
@@ -1436,90 +1415,6 @@ section.row.competition {
   transition: transform 0.3s ease;
   z-index: 5;
 }
-
-/* Sidebar genel */
-.sidebar {
-  position: fixed;
-  height: 100%;
-  width: 250px;
-  top: 0;
-  left: -250px;
-  background-color: #111;
-  padding-top: 5vh;
-  transition: left 0.3s ease;
-  z-index: 4;
-  overflow-y: auto;
-}
-
-.sidebar.active {
-  left: 0;
-}
-
-.sidebar-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar-menu li {
-  padding: 20px 20px;
-  font-size: 1.3rem;
-}
-
-.sidebar-menu li a {
-  color: #fff;
-  text-decoration: none;
-  display: block;
-}
-
-.close-btn {
-  padding-left: 20px;
-}
-
-.sidebar-menu li a:hover {
-  background-color: #222;
-  border-radius: 5px;
-}
-
-/* Submenu */
-.sidebar-menu .submenu {
-  display: none;
-  list-style: none;
-  padding-left: 15px;
-}
-
-.submenu li {
-  font-weight: 300;
-  font-size: 1rem;
-  color: #d0d0d0;
-}
-
-.sidebar-menu .submenu.open {
-  display: block;
-}
-
-.submenu-icon {
-  margin-left: 5px;
-  transform: rotateZ(-90deg);
-  transition: transform 0.3s;
-}
-
-.submenu-icon.open {
-  transform: rotateZ(0deg);
-}
-
-.sidebar-menu .submenu li {
-  padding: 5px 0;
-}
-
-.sidebar-menu li.open>.submenu {
-  display: block;
-}
-
-.sidebar-menu .submenu li a {
-  font-size: 0.9rem;
-}
-
 
 .row.contact.padding {
   margin-top: 10%;
@@ -1578,21 +1473,40 @@ section.row.competition {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-image: linear-gradient(to top, rgba(14, 14, 14, 1), rgb(48, 48, 48, 1));
+  justify-content: space-between; /* Sol ve sağ uçlar, orta ortada */
+  background-image: linear-gradient(to top, rgba(14, 14, 14, 1), rgba(48, 48, 48, 1));
   width: 100%;
   height: 20vh;
+  padding: 0 5vw; /* Sağ-sol boşluk */
+  margin-top: 5vh;
+  box-sizing: border-box;
 }
 
 .info-panel p {
-  padding-left: 5vw;
   font-size: 1rem;
   font-weight: 350;
+  margin: 2px 0;
 }
 
 .info-panel #teamName {
-  padding-left: 5vw;
   font-size: 1.25rem;
-  font-weight: 350;
+}
+
+.info-part, .info-part2 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Satırlar arası boşluk */
+}
+
+.social-icon {
+  display: flex;
+  flex-direction: row;
+  gap: 15px; /* Birden fazla ikon olursa arası boşluk */
+}
+
+.social-icon img {
+  width: 30px;
+  height: 30px;
 }
 
 /* Contact section'da paddi ng kontrolü */
@@ -1620,32 +1534,69 @@ section.row.competition {
   margin-bottom: 2vh;
 }
 
-/* Buton */
-.posta #submit {
-  margin-top: 2vh;
+#submit {
   position: relative;
-  width: 15vw;
-  height: 2rem;
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background-color: #8a8a8a;
-  color: #b3b3b3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 28px;
+  background: linear-gradient(270deg, #1f1f1f, #3a3a3a, #1f1f1f);
+  background-size: 200% 200%;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: color 0.3s, text-shadow 0.3s, background-color 0.3s;
-  outline: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.posta #submit:hover {
-  color: #fff;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-  background-color: #3c3c3c;
-  border: 2px solid #ffc800;
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  filter: invert(1); /* beyaz yapmak için */
 }
 
-/* === INPUT BOX === */
+
+/* Hover & Active */
+#submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgb(117, 92, 0, 0.4); /* veya rgba(0, 0, 0, 0.5) */
+  animation: gradientRight 1.5s forwards; /* sağa kay */
+}
+
+#submit:not(:hover) {
+  animation: gradientLeft 1.5s forwards; /* sola dön */
+}
+
+#submit:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes gradientRight {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+/* sola animasyon */
+@keyframes gradientLeft {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0% 50%;
+  }
+}
+
+
 .input-box {
   position: relative;
   width: 100%;
@@ -1742,8 +1693,6 @@ section.row.competition {
 
 }
 
-
-
 @media (max-width: 900px) {
   .content-area {
     flex-direction: column;
@@ -1755,6 +1704,12 @@ section.row.competition {
     flex: 1 1 100%;
     width: 100%;
   }
+}
+
+#vrc2 {
+  display: none;
+  width: 100%;
+  height: 30vh;
 }
 
 @media (max-width: 900px) {
@@ -1817,23 +1772,29 @@ section.row.competition {
   }
 
   .gear-canvas-wrapper {
-    max-width: 90vw;
-    /*benim telde kenarları kesilmiş duruyo frame küçük evet bendede onu çözemedim*/
-    max-height: 100%;
+    max-width: 95vw;
+    max-height: 100vh;
     margin: 0;
   }
 
   .row.about {
     flex-wrap: wrap;
+    margin: 0;
   }
 
   .slider {
-    gap: 10px;
+    gap: 0;
+  }
+
+  .text-div .text {
+    max-width: 90vw;
+    font-size: 1rem;
   }
 
   .text span {
     color: white;
-    font-size: 1rem;
+    max-width: 100%;
+    line-height: 80%;
   }
 
   header.navbar {
@@ -1859,10 +1820,6 @@ section.row.competition {
     margin-top: 10vh;
   }
 
-  #gearCanvas {
-    margin-top: 30vh;
-  }
-
   .card {
     width: 250px;
     height: auto;
@@ -1878,28 +1835,202 @@ section.row.competition {
   .posta {
     margin: 0;
   }
-  .posta#submit{
+
+  .posta#submit {
     width: 100%;
   }
+
   .input-box input,
   .input-box textarea {
     width: 100%;
   }
 
-  .sidebar {
-    left: auto !important;
-    right: -250px;
-    transition: right 0.3s ease;
-    width: 60vw;
-    z-index: 1000;
+  .message {
+    resize: none !important;
   }
 
-  .sidebar.active {
-    right: 0;
-    left: auto !important;
+
+  .gears-div {
+    margin-top: 3vh;
+    margin-left: 0;
   }
 
-  .sidebar-menu li {
-    padding: 15px;
+  article {
+    display: flex;
+    margin: 0;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #who-title {
+    margin-top: 10vh;
+  }
+
+  #compet-title {
+    display: none;
+  }
+
+  #vrc {
+    display: none;
+  }
+
+  #vrc2 {
+    display: block;
+    background-image: url("/photos/photo6.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .row.about {
+    flex-direction: column;
+  }
+
+  #photo {
+    order: 1;
+  }
+
+  .extra {
+    order: 3;
   }
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+/* Ana Menü */
+.dropdown-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  top: 100%;
+  left: 0;
+  background: transparent;
+  min-width: 200px;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-menu a {
+  color: #eee;
+  background: #292929;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.3s ease;
+  border-radius: 5px;
+}
+
+.dropdown-menu a:hover {
+  background: #383838;
+}
+
+/* Submenu */
+.has-submenu {
+  position: relative;
+}
+
+.has-submenu > a::after {
+  float: right;
+}
+
+.submenu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  top: 0;
+  left: 100%;
+  background: transparent;
+  min-width: 200px;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  padding-left: 5px;
+}
+
+.submenu.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.submenu a {
+  color: #eee;
+  padding: 10px 14px;
+  display: block;
+}
+
+/* Footer içindeki sosyal medya alanı */
+.social-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.clip {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.svg--source {
+  display: none;
+}
+
+.svg--icon {
+  width: 2rem;
+  height: 2rem;
+  display: block;
+  margin: 0 auto;
+  fill: currentColor; /* ikon rengini color’dan alır */
+}
+
+.share {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #353c4a;
+  border: .125rem solid #f3f3f3;
+  box-shadow: 0 0 8px 0 rgba(50, 50, 50, 0.15);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.share:hover {
+  transform: scale(1.1);
+}
+
+/* Renkli hover efektleri */
+.twitter:hover { color: #00aced; box-shadow: 0 0 15px #00aced; }
+.google:hover { color: #dd4b39; box-shadow: 0 0 15px #dd4b39; }
+.facebook:hover { color: #3b5998; box-shadow: 0 0 15px #3b5998; }
+.github:hover { color: #4183c4; box-shadow: 0 0 15px #4183c4; }
+.pinterest:hover { color: #bd081c; box-shadow: 0 0 15px #bd081c; }
+.youtube:hover { color: #cd201f; box-shadow: 0 0 15px #cd201f; }

@@ -74,4 +74,4 @@ const files = [
   { key: "roughness", url: "/texture/roughness.jpg", type: "texture" },
 ];
 
-cacheFiles(files).then(() => console.log("Cache Rate: 100%"));
+if (window.innerWidth >= 768) { cacheFiles(files).then(() => console.log("Cache Rate: 100%")); }
