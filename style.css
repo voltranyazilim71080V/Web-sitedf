@@ -1437,6 +1437,10 @@ section.row.competition {
 
 /* CONTACT SECTION */
 
+form {
+  width: 100%;
+}
+
 .contact-panel {
   display: flex;
   flex-direction: row;
@@ -1612,6 +1616,7 @@ section.row.competition {
   outline: none;
   z-index: 1;
   position: relative;
+  resize: none;
 }
 
 .input-box textarea {
