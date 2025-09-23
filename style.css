@@ -233,6 +233,10 @@ b .nav-wrap::after {
   outline: none;
 }
 
+.contact-area {
+  margin-top: 30vh;
+}
+
 /* Hover efekti: parlama + alt çizgi */
 .menu .contact-button:hover,
 .menu .contact-button:focus-visible {
@@ -2042,9 +2046,9 @@ footer ul {
 }
 
 .legal {
-  font-size: 12px;
+  font-size: 16px;
   margin: 0;
-  color: #a2b6e1;
+  color: #e8e8e8;
 }
 
 footer {
@@ -2063,4 +2067,9 @@ footer section {
   align-items: center;
   gap: 30px;
   width: 100%;
+}
+
+.social-icon {
+  width: 60%;
+  height: 60%;
 }
