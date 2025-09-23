@@ -23,6 +23,20 @@
   <meta property="twitter:description" content="Voltran Robotics, Pertevniyal Lisesi'nin resmi robotik takımıdır. FRC ve VEX yarışmalarında geleceği inşa eden genç mühendisler, yazılımcılar ve liderler." />
   <meta property="twitter:image" content="SVG/voltranBanner.svg" />
 
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -380,14 +394,82 @@
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.666178410458!2d28.953005899999997!3d41.010679200000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab987fea2c943%3A0x79bd193072ae9667!2sPertevniyal%20Lisesi!5e0!3m2!1str!2str!4v1756844642213!5m2!1str!2str" style="border:0;" allowfullscreen="" loading="fast" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
             </div>
         </section>
-        <footer class="info-panel">
-          <div class="info-part">
-            <p id="teamName">VOLTRAN ROBOTICS</p>
-            <p>voltranrobotics@gmail.com</p>
+        <footer>
+          <div class="background">
+            <svg
+              version="1.1"
+              id="wave_footer"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 1600 900"
+            >
+              <defs>
+                <path
+                  id="wave"
+                  fill="rgba(246, 198, 52, 0.6)"
+                  d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+          s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z"
+                />
+              </defs>
+              <g>
+                <use xlink:href="#wave" opacity=".4">
+                  <animateTransform
+                    attributeName="transform"
+                    attributeType="XML"
+                    type="translate"
+                    dur="8s"
+                    calcMode="spline"
+                    values="270 230; -334 180; 270 230"
+                    keyTimes="0; .5; 1"
+                    keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+                    repeatCount="indefinite"
+                  />
+                </use>
+                <use xlink:href="#wave" opacity=".6">
+                  <animateTransform
+                    attributeName="transform"
+                    attributeType="XML"
+                    type="translate"
+                    dur="6s"
+                    calcMode="spline"
+                    values="-270 230;243 220;-270 230"
+                    keyTimes="0; .6; 1"
+                    keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+                    repeatCount="indefinite"
+                  />
+                </use>
+                <use xlink:href="#wave" opacty=".9">
+                  <animateTransform
+                    attributeName="transform"
+                    attributeType="XML"
+                    type="translate"
+                    dur="4s"
+                    calcMode="spline"
+                    values="0 230;-140 200;0 230"
+                    keyTimes="0; .4; 1"
+                    keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+                    repeatCount="indefinite"
+                  />
+                </use>
+              </g>
+            </svg>
           </div>
-
-
-          <p>Atatürk Bulvarı No1 34080 Fatih/İstanbul</p>
+          <section>
+            <ul class="socials">
+              <li><a class="fa-brands fa-github"></a></li>
+              <li><a class="fa-brands fa-codepen"></a></li>
+              <li><a class="fa-brands fa-dribbble"></a></li>
+              <li><a class="fa-brands fa-instagram"></a></li>
+            </ul>
+            <ul class="links">
+              <li><a>Home</a></li>
+              <li><a>About</a></li>
+              <li><a>Portfolio</a></li>
+              <li><a>Skills</a></li>
+              <li><a>Contact</a></li>
+            </ul>
+            <p class="legal">© 2025 All rights reserved</p>
+          </section>
         </footer>
       </main>
 

@@ -232,3 +232,7 @@ dropdown.addEventListener("mouseleave", () => {
     dropdownMenu.classList.remove("show");
   }, 300); // 0.3s gecikme
 });
+
+document.getElementById("wave_footer").addEventListener("click", () => {
+  document.getElementById("wave_footer").setAttribute("viewBox", `0 0 ${window.innerWidth} ${window.innerHeight}`);
+});
