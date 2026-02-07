@@ -210,6 +210,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }, { once: true });
 
 function scrollToSection(id) {
+  if (id == "scoutapp") { window.location.href = "http://voltranrobotics.tech/pathplanner"; }
+  if (id == "pathplanner") { window.location.href = "http://voltranrobotics.tech/scoutapp"; }
   if (id == "sponsorship") {
     document.getElementById(`${id}_section`).scrollIntoView({ behavior: "smooth", block: "end" });
   }else {
